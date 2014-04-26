@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "zjlx_stock_runtime", schema = "")
 @SuppressWarnings("serial")
-public class ZjlxStockRuntime {
+public class ZjlxStockRuntime extends IdEntity{
 	private java.util.Date extractTime;
 	private String code; //代码
 	private String name; //名称
@@ -64,7 +64,7 @@ public class ZjlxStockRuntime {
 	}
 
 
-	@Column(name ="jrzdf",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzdf",nullable=true,precision=10,scale=4)
 	public BigDecimal getJrzdf() {
 		return jrzdf;
 	}
@@ -73,7 +73,7 @@ public class ZjlxStockRuntime {
 		this.jrzdf = jrzdf;
 	}
 
-	@Column(name ="latestPrice",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="latestPrice",nullable=true,precision=10,scale=4)
 	public BigDecimal getLatestPrice() {
 		return latestPrice;
 	}
@@ -84,7 +84,7 @@ public class ZjlxStockRuntime {
 
 	
 
-	@Column(name ="jrzljlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzljlr",nullable=true)
 	public BigDecimal getJrzljlr() {
 		return jrzljlr;
 	}
@@ -93,7 +93,7 @@ public class ZjlxStockRuntime {
 		this.jrzljlr = jrzljlr;
 	}
 
-	@Column(name ="rateOfJrzljlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrzljlr",nullable=true,precision=10,scale=4)
 	public BigDecimal getRateOfJrzljlr() {
 		return rateOfJrzljlr;
 	}
@@ -102,7 +102,7 @@ public class ZjlxStockRuntime {
 		this.rateOfJrzljlr = rateOfJrzljlr;
 	}
 
-	@Column(name ="jrcddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrcddjlr",nullable=true,precision=19,scale=4)
 	public BigDecimal getJrcddjlr() {
 		return jrcddjlr;
 	}
@@ -111,7 +111,7 @@ public class ZjlxStockRuntime {
 		this.jrcddjlr = jrcddjlr;
 	}
 
-	@Column(name ="rateOfJrcddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrcddjlr",nullable=true,precision=10,scale=4)
 	public BigDecimal getRateOfJrcddjlr() {
 		return rateOfJrcddjlr;
 	}
@@ -120,7 +120,7 @@ public class ZjlxStockRuntime {
 		this.rateOfJrcddjlr = rateOfJrcddjlr;
 	}
 
-	@Column(name ="jrddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrddjlr",nullable=true,precision=19,scale=4)
 	public BigDecimal getJrddjlr() {
 		return jrddjlr;
 	}
@@ -129,7 +129,7 @@ public class ZjlxStockRuntime {
 		this.jrddjlr = jrddjlr;
 	}
 
-	@Column(name ="rateOfJrddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrddjlr",nullable=true,precision=10,scale=4)
 	public BigDecimal getRateOfJrddjlr() {
 		return rateOfJrddjlr;
 	}
@@ -138,7 +138,7 @@ public class ZjlxStockRuntime {
 		this.rateOfJrddjlr = rateOfJrddjlr;
 	}
 
-	@Column(name ="jrzdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzdjlr",nullable=true,precision=19,scale=4)
 	public BigDecimal getJrzdjlr() {
 		return jrzdjlr;
 	}
@@ -147,7 +147,7 @@ public class ZjlxStockRuntime {
 		this.jrzdjlr = jrzdjlr;
 	}
 
-	@Column(name ="rateOfJrzdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrzdjlr",nullable=true,precision=10,scale=4)
 	public BigDecimal getRateOfJrzdjlr() {
 		return rateOfJrzdjlr;
 	}
@@ -156,7 +156,7 @@ public class ZjlxStockRuntime {
 		this.rateOfJrzdjlr = rateOfJrzdjlr;
 	}
 
-	@Column(name ="jrxdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrxdjlr",nullable=true,precision=19,scale=4)
 	public BigDecimal getJrxdjlr() {
 		return jrxdjlr;
 	}
@@ -165,7 +165,7 @@ public class ZjlxStockRuntime {
 		this.jrxdjlr = jrxdjlr;
 	}
 
-	@Column(name ="rateOfJrxdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrxdjlr",nullable=true,precision=10,scale=4)
 	public BigDecimal getRateOfJrxdjlr() {
 		return rateOfJrxdjlr;
 	}
@@ -190,4 +190,6 @@ public class ZjlxStockRuntime {
 		       +" 今日中小流入净额:"+jrxdjlr
 		       +" 今日小单流入净占比:"+rateOfJrxdjlr;	  
 	}
+	
+	
 }

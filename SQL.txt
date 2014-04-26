@@ -1,0 +1,105 @@
+--delete from zjlx_stock_runtime
+
+
+select * from zjlx_stock_runtime
+where code='600399'
+
+
+
+select * from zjlx_stock_runtime
+where code='002143'
+
+select * from zjlx_stock_runtime
+where code in (
+select code from (
+
+select code,name,max(rateofjrxdjlr) - min(rateofjrxdjlr) as it from zjlx_stock_runtime
+WHERE extracttime >
+                               TO_DATE ('23/04/2014 14:20:00',
+                                        'DD/MM/YYYY, HH24:mi:ss')
+group by code,name 
+having min(rateofjrxdjlr) <0
+order by it desc ) where rownum <10
+) order by code,db_update_tsp;
+
+
+
+
+
+select * from zjlx_stock_runtime
+where code in (
+select code from (
+
+select code,name,max(jrxdjlr),min(jrxdjlr),max(jrxdjlr) - min(jrxdjlr) as it from zjlx_stock_runtime
+WHERE extracttime >
+                               TO_DATE ('23/04/2014 13:50:00',
+                                        'DD/MM/YYYY, HH24:mi:ss')
+group by code,name 
+having min(jrxdjlr) <0
+order by it desc ) where rownum <10
+) order by code,db_update_tsp;
+/* Formatted on 23/04/2014 11:29:38 (QP5 v5.227.12220.39724) */
+/* Formatted on 23/04/2014 11:30:28 (QP5 v5.227.12220.39724) */
+SELECT *
+  FROM zjlx_stock_runtime
+ WHERE code IN
+          (SELECT code
+             FROM (  SELECT *
+                       FROM zjlx_stock_runtime
+                      WHERE extracttime =
+                               TO_DATE ('23/04/2014 11:18:23',
+                                        'DD/MM/YYYY, HH:mi:ss')
+                   ORDER BY jrzdf DESC)
+                   where rownum<20
+                   )
+ 
+order by code,db_update_tsp;
+
+
+
+select * from (
+select * from zjlx_stock_runtime
+order by latestprice desc)
+where rownum< 200
+
+delete from zjlx_stock_runtime
+where extracttime in (
+select extracttime from (
+select to_char(extracttime,'YYYY-MM-DD HH24:mi:ss'),count(1) from zjlx_stock_runtime
+group by extracttime
+having count(1)<10) aa)
+
+
+
+
+
+
+
+
+
+select * from zjlx_stock_runtime
+where code in (
+select code from (
+
+select code,name,max(rateofjrzljlr) - min(rateofjrzljlr) as it from zjlx_stock_runtime
+WHERE extracttime >
+                               TO_DATE ('23/04/2014 14:20:00',
+                                        'DD/MM/YYYY, HH24:mi:ss')
+group by code,name 
+order by it desc ) where rownum <10
+) order by code,db_update_tsp;
+
+
+select to_char(extracttime,'yyyy-MM-DD HH24:mi:ss'), count(*) from zjlx_stock_runtime
+group by extracttime;
+
+
+--buckup data
+insert into zjlx_stock_runtime_archive 
+ select * from zjlx_stock_runtime
+ where extracttime > (
+select max(extracttime) from zjlx_stock_runtime_archive)
+
+
+
+

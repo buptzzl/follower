@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "zjlx_stock_eod", schema = "")
 @SuppressWarnings("serial")
-public class ZjlxStockEod {
+public class ZjlxStockEod extends IdEntity {
 	private java.util.Date businessDate;
 	private java.lang.String code;
 	private java.lang.String name;
@@ -38,7 +38,7 @@ public class ZjlxStockEod {
 	private BigDecimal jrxdjlr;
 	private BigDecimal rateOfJrxdjlr;
 
-	@Column(name = "businessDate", nullable = true, precision = 23, scale = 3, length = 8)
+	@Column(name = "businessDate", nullable = true)
 	public java.util.Date getBusinessDate() {
 		return businessDate;
 	}
@@ -47,7 +47,7 @@ public class ZjlxStockEod {
 		this.businessDate = businessDate;
 	}
 
-	@Column(name = "code", nullable = true, precision = 64, scale = 0, length = 64)
+	@Column(name = "code", nullable = true)
 	public java.lang.String getCode() {
 		return code;
 	}
@@ -56,7 +56,7 @@ public class ZjlxStockEod {
 		this.code = code;
 	}
 
-	@Column(name = "name", nullable = true, precision = 64, scale = 0, length = 64)
+	@Column(name = "name", nullable = true)
 	public java.lang.String getName() {
 		return name;
 	}
@@ -65,7 +65,7 @@ public class ZjlxStockEod {
 		this.name = name;
 	}
 
-	@Column(name ="openPrice",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="openPrice",nullable=true)
 	public BigDecimal getOpenPrice() {
 		return openPrice;
 	}
@@ -74,7 +74,7 @@ public class ZjlxStockEod {
 		this.openPrice = openPrice;
 	}
 
-	@Column(name ="closePrice",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="closePrice",nullable=true)
 	public BigDecimal getClosePrice() {
 		return closePrice;
 	}
@@ -83,7 +83,7 @@ public class ZjlxStockEod {
 		this.closePrice = closePrice;
 	}
 
-	@Column(name ="minPrice",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="minPrice",nullable=true)
 	public BigDecimal getMinPrice() {
 		return minPrice;
 	}
@@ -93,7 +93,7 @@ public class ZjlxStockEod {
 		this.minPrice = minPrice;
 	}
 
-	@Column(name ="maxPrice",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="maxPrice",nullable=true)
 	public BigDecimal getMaxPrice() {
 		return maxPrice;
 	}
@@ -102,7 +102,7 @@ public class ZjlxStockEod {
 		this.maxPrice = maxPrice;
 	}
 
-	@Column(name ="jrzdf",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzdf",nullable=true)
 	public BigDecimal getJrzdf() {
 		return jrzdf;
 	}
@@ -111,7 +111,7 @@ public class ZjlxStockEod {
 		this.jrzdf = jrzdf;
 	}
 
-	@Column(name ="jrzljlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzljlr",nullable=true)
 	public BigDecimal getJrzljlr() {
 		return jrzljlr;
 	}
@@ -120,7 +120,7 @@ public class ZjlxStockEod {
 		this.jrzljlr = jrzljlr;
 	}
 
-	@Column(name ="rateOfJrzljlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrzljlr",nullable=true)
 	public BigDecimal getRateOfJrzljlr() {
 		return rateOfJrzljlr;
 	}
@@ -129,7 +129,7 @@ public class ZjlxStockEod {
 		this.rateOfJrzljlr = rateOfJrzljlr;
 	}
 
-	@Column(name ="jrcddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrcddjlr",nullable=true)
 	public BigDecimal getJrcddjlr() {
 		return jrcddjlr;
 	}
@@ -138,7 +138,7 @@ public class ZjlxStockEod {
 		this.jrcddjlr = jrcddjlr;
 	}
 
-	@Column(name ="rateOfJrcddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrcddjlr",nullable=true)
 	public BigDecimal getRateOfJrcddjlr() {
 		return rateOfJrcddjlr;
 	}
@@ -147,7 +147,7 @@ public class ZjlxStockEod {
 		this.rateOfJrcddjlr = rateOfJrcddjlr;
 	}
 
-	@Column(name ="jrddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrddjlr",nullable=true)
 	public BigDecimal getJrddjlr() {
 		return jrddjlr;
 	}
@@ -156,7 +156,7 @@ public class ZjlxStockEod {
 		this.jrddjlr = jrddjlr;
 	}
 
-	@Column(name ="rateOfJrddjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrddjlr",nullable=true)
 	public BigDecimal getRateOfJrddjlr() {
 		return rateOfJrddjlr;
 	}
@@ -165,7 +165,7 @@ public class ZjlxStockEod {
 		this.rateOfJrddjlr = rateOfJrddjlr;
 	}
 
-	@Column(name ="jrzdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrzdjlr",nullable=true)
 	public BigDecimal getJrzdjlr() {
 		return jrzdjlr;
 	}
@@ -174,7 +174,7 @@ public class ZjlxStockEod {
 		this.jrzdjlr = jrzdjlr;
 	}
 
-	@Column(name ="rateOfJrzdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrzdjlr",nullable=true)
 	public BigDecimal getRateOfJrzdjlr() {
 		return rateOfJrzdjlr;
 	}
@@ -183,7 +183,7 @@ public class ZjlxStockEod {
 		this.rateOfJrzdjlr = rateOfJrzdjlr;
 	}
 
-	@Column(name ="jrxdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="jrxdjlr",nullable=true)
 	public BigDecimal getJrxdjlr() {
 		return jrxdjlr;
 	}
@@ -192,7 +192,7 @@ public class ZjlxStockEod {
 		this.jrxdjlr = jrxdjlr;
 	}
 
-	@Column(name ="rateOfJrxdjlr",nullable=true,precision=18,scale=2,length=9)
+	@Column(name ="rateOfJrxdjlr",nullable=true)
 	public BigDecimal getRateOfJrxdjlr() {
 		return rateOfJrxdjlr;
 	}

@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
 
-public class ZjlxAggregator {
-	private List<ZjlxStockRuntime> data = new ArrayList<ZjlxStockRuntime>();
+public class ZjlxAggregator<T> {
+	private List<T> data = new ArrayList<T>();
    
 	private int totalPages;
     private int pageSize;
@@ -66,11 +66,11 @@ public class ZjlxAggregator {
 	}
 
 	
-	public void setData(List<ZjlxStockRuntime> data) {
+	public void setData(List<T> data) {
 		this.data = data;
 	}
 	
-	public List<ZjlxStockRuntime> getData() {
+	public List<T> getData() {
 		return data;
 	}
   

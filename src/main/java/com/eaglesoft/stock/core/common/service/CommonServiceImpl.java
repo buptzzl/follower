@@ -79,7 +79,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	public <T> T getEntity(Class entityName, Serializable id) {
-		return commonDao.getEntity(entityName, id);
+		return (T) commonDao.getEntity(entityName, id);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CommonServiceImpl implements CommonService {
 	
 	public <T> T singleResult(String hql)
 	{
-		return commonDao.singleResult(hql);
+		return (T) commonDao.singleResult(hql);
 	}
 
 	/**
