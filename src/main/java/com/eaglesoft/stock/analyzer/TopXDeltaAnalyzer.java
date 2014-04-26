@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.eaglesoft.stock.core.common.dao.ZjlxOfStockDao;
+import com.eaglesoft.stock.core.common.dao.impl.ZjlxOfStockDao;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntimeGroup;
 

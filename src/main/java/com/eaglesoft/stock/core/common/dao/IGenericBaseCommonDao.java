@@ -8,8 +8,22 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.springframework.dao.DataAccessException;
+
+
+/**
+ * 
+ * 类描述：DAO层泛型基类接口
+ * 
+ * @author dingsoft
+ * @date： 日期：2012-12-8 时间：下午05:37:33
+ * @version 1.0
+ */
 public interface IGenericBaseCommonDao {
-	
+	/**
+	 * 获取所有数据库表
+	 * @return
+	 */
 	
 	public Integer getAllDbTableSize();
 	public <T> void save(T entity);
@@ -30,7 +44,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void delete(T entitie);
 
 	/**
-	 * 根据实体名称和主键获取实�?
+	 * 根据实体名称和主键获取实体
 	 * 
 	 * @param <T>
 	 * @param entityName
@@ -49,7 +63,7 @@ public interface IGenericBaseCommonDao {
 	public <T> T findUniqueByProperty(Class<T> entityClass, String propertyName, Object value);
 
 	/**
-	 * 按属性查找对象列�?
+	 * 按属性查找对象列表.
 	 */
 	public <T> List<T> findByProperty(Class<T> entityClass, String propertyName, Object value);
 	/**
@@ -61,7 +75,7 @@ public interface IGenericBaseCommonDao {
 	public <T> List<T> loadAll(final Class<T> entityClass);
 
 	/**
-	 * 根据实体名称和主键获取实�?
+	 * 根据实体名称和主键获取实体
 	 * 
 	 * @param <T>
 	 * 
@@ -83,7 +97,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void deleteAllEntitie(Collection<T> entities);
 
 	/**
-	 * 更新指定的实�?
+	 * 更新指定的实体
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -128,7 +142,7 @@ public interface IGenericBaseCommonDao {
 	public <T> List<T> findListbySql(String query);
 
 	/**
-	 * 通过属�?称获取实体带排序
+	 * 通过属性称获取实体带排序
 	 * 
 	 * @param <T>
 	 * @param clas
@@ -136,7 +150,6 @@ public interface IGenericBaseCommonDao {
 	 */
 	public <T> List<T> findByPropertyisOrder(Class<T> entityClass, String propertyName, Object value, boolean isAsc);
 
-	
 	public Session getSession();
 	public List findByExample(final String entityName, final Object exampleEntity);
 	/**
@@ -147,12 +160,7 @@ public interface IGenericBaseCommonDao {
 	 * @return
 	 */
 	public Map<Object,Object> getHashMapbyQuery(String query);
-	/**
-	 * 返回jquery datatables模型
-	 * @param cq
-	 * @param isOffset
-	 * @return
-	 */
+	
 	
 
 	/**
@@ -168,33 +176,33 @@ public interface IGenericBaseCommonDao {
 	
 	/**
 	 * 通过JDBC查找对象集合
-	 * 使用指定的检索标准检索数据返回数�?
+	 * 使用指定的检索标准检索数据返回数据
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql,Object... objs);
 	
 	
 	/**
 	 * 通过JDBC查找对象集合
-	 * 使用指定的检索标准检索数据返回数�?
+	 * 使用指定的检索标准检索数据返回数据
 	 */
 	public Map<String, Object> findOneForJdbc(String sql,Object... objs);
 	
 	/**
-	 * 通过JDBC查找对象集合,带分�?
+	 * 通过JDBC查找对象集合,带分页
 	 * 使用指定的检索标准检索数据并分页返回数据
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql, int page, int rows);
 	
 
 	/**
-	 * 通过JDBC查找对象集合,带分�?
+	 * 通过JDBC查找对象集合,带分页
 	 * 使用指定的检索标准检索数据并分页返回数据
 	 */
 	public <T> List<T> findObjForJdbc(String sql, int page, int rows,Class<T> clazz) ;
 	
 	
 	/**
-	 * 使用指定的检索标准检索数据并分页返回数据-采用预处理方�?
+	 * 使用指定的检索标准检索数据并分页返回数据-采用预处理方式
 	 * 
 	 * @param criteria
 	 * @param firstResult
@@ -209,7 +217,7 @@ public interface IGenericBaseCommonDao {
 	 */
 	public Long getCountForJdbc(String  sql) ;
 	/**
-	 * 使用指定的检索标准检索数据并分页返回数据For JDBC-采用预处理方�?
+	 * 使用指定的检索标准检索数据并分页返回数据For JDBC-采用预处理方式
 	 * 
 	 */
 	public Long getCountForJdbcParam(String  sql,Object[] objs);
@@ -234,6 +242,27 @@ public interface IGenericBaseCommonDao {
      */
     public Query createHQLQuery(String hql, Object... values) ; 
     
+    /**
+     * 获取SQLBuilder中query对象，
+     * 
+     * @param sqlBuilder
+     * @return
+     */
+    public Query getQuery(SQLBuilder sqlBuilder);
+
+    /**
+     * 获取SQLBuilder中query对象，
+     * 
+     * @param sqlBuilder
+     * @return
+     */
+    public SQLQuery getSQLQuery(SQLBuilder sqlBuilder);
+    /**
+     * 提供基于Query对象的分页查询，非dategrid场合请使用此分页方法
+     * 
+     * @param query
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public List paginationQuery(Query query) ;
 }

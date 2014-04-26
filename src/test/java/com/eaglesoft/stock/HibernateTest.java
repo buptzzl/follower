@@ -12,7 +12,7 @@ import com.eaglesoft.stock.parser.ZjlxDataParser;
 
 public class HibernateTest {
 
-	final static String BB1 = "600739,1,1,ÁÉÄş³É´ó,15.44,3.90,9596Íò,13.72,7553Íò,10.80,2043Íò,2.92,-5208Íò,-7.44,-4388Íò,-6.27";
+	final static String BB1 = "600739,1,1,è¾½å®æˆå¤§,15.44,3.90,9596ä¸‡,13.72,7553ä¸‡,10.80,2043ä¸‡,2.92,-5208ä¸‡,-7.44,-4388ä¸‡,-6.27";
 
 	@Before
 	public void setUp() throws Exception {

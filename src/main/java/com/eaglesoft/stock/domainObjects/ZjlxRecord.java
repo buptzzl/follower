@@ -1,4 +1,5 @@
-package com.eaglesoft.stock.domainObjects;
+
+	package com.eaglesoft.stock.domainObjects;
 
 import java.math.BigDecimal;
 
@@ -8,20 +9,20 @@ public class ZjlxRecord {
 	
 	
 
-	private String code; //´úÂë
-	private String name; //Ãû³Æ
-	private BigDecimal latesPrice;//×îĞÂ¼Û
-	private BigDecimal jrzdf;  //½ñÈÕÕÇµø·ù
-	private BigDecimal jrzljlr; //½ñÈÕÖ÷Á¦¾»Á÷Èë¾»¶î
-	private BigDecimal rateOfJrzljlr;//½ñÈÕÖ÷Á¦¾»Á÷Èë¾»Õ¼±È
-	private BigDecimal jrcddjlr;//½ñÈÕ³¬´óµ¥Á÷Èë¾»¶î
-	private BigDecimal rateOfJrcddjlr;//½ñÈÕ³¬´óµ¥Á÷Èë¾»Õ¼±È
-	private BigDecimal jrddjlr;//½ñÈÕ´óµ¥Á÷Èë¾»¶î
-	private BigDecimal rateOfJrddjlr;//½ñÈÕ´óµ¥Á÷Èë¾»Õ¼±È
-	private BigDecimal jrzdjlr;//½ñÈÕÖĞµ¥Á÷Èë¾»¶î
-	private BigDecimal rateOfJrzdjlr;//½ñÈÕÖĞµ¥Á÷Èë¾»Õ¼±È
-	private BigDecimal  jrxdjlr;//½ñÈÕÖĞĞ¡Á÷Èë¾»¶î
-	private BigDecimal  rateOfJrxdjlr;//½ñÈÕĞ¡µ¥Á÷Èë¾»Õ¼±È
+	private String code; //ä»£ç 
+	private String name; //åç§°
+	private BigDecimal latesPrice;//æœ€æ–°ä»·
+	private BigDecimal jrzdf;  //ä»Šæ—¥æ¶¨è·Œå¹…
+	private BigDecimal jrzljlr; //ä»Šæ—¥ä¸»åŠ›å‡€æµå…¥å‡€é¢
+	private BigDecimal rateOfJrzljlr;//ä»Šæ—¥ä¸»åŠ›å‡€æµå…¥å‡€å æ¯”
+	private BigDecimal jrcddjlr;//ä»Šæ—¥è¶…å¤§å•æµå…¥å‡€é¢
+	private BigDecimal rateOfJrcddjlr;//ä»Šæ—¥è¶…å¤§å•æµå…¥å‡€å æ¯”
+	private BigDecimal jrddjlr;//ä»Šæ—¥å¤§å•æµå…¥å‡€é¢
+	private BigDecimal rateOfJrddjlr;//ä»Šæ—¥å¤§å•æµå…¥å‡€å æ¯”
+	private BigDecimal jrzdjlr;//ä»Šæ—¥ä¸­å•æµå…¥å‡€é¢
+	private BigDecimal rateOfJrzdjlr;//ä»Šæ—¥ä¸­å•æµå…¥å‡€å æ¯”
+	private BigDecimal  jrxdjlr;//ä»Šæ—¥ä¸­å°æµå…¥å‡€é¢
+	private BigDecimal  rateOfJrxdjlr;//ä»Šæ—¥å°å•æµå…¥å‡€å æ¯”
 
 	public String getCode() {
 		return code;
@@ -136,19 +137,19 @@ public class ZjlxRecord {
 	}
 	
 	public String toString() {
-		return "´úÂë:"+code
-		       +" Ãû³Æ:"+name
-		       +" ×îĞÂ¼Û:"+latesPrice
-		       +" ½ñÈÕÕÇµø·ù:"+jrzdf
-		       +" ½ñÈÕÖ÷Á¦¾»Á÷Èë¾»¶î:"+jrzljlr
-		       +" ½ñÈÕÖ÷Á¦¾»Á÷Èë¾»Õ¼±È:"+rateOfJrzljlr
-		       +" ½ñÈÕ³¬´óµ¥Á÷Èë¾»¶î:"+jrcddjlr
-		       +" ½ñÈÕ³¬´óµ¥Á÷Èë¾»Õ¼±È:"+rateOfJrcddjlr
-		       +" ½ñÈÕ´óµ¥Á÷Èë¾»¶î:"+jrddjlr
-		       +" ½ñÈÕ´óµ¥Á÷Èë¾»Õ¼±È:"+rateOfJrddjlr
-		       +" ½ñÈÕÖĞµ¥Á÷Èë¾»¶î:"+jrzdjlr
-		       +" ½ñÈÕÖĞµ¥Á÷Èë¾»Õ¼±È"+rateOfJrzdjlr
-		       +" ½ñÈÕÖĞĞ¡Á÷Èë¾»¶î:"+jrxdjlr
-		       +" ½ñÈÕĞ¡µ¥Á÷Èë¾»Õ¼±È:"+rateOfJrxdjlr;	  
+		return "ä»£ç :"+code
+		       +" åç§°:"+name
+		       +" æœ€æ–°ä»·:"+latesPrice
+		       +" ä»Šæ—¥æ¶¨è·Œå¹…:"+jrzdf
+		       +" ä»Šæ—¥ä¸»åŠ›å‡€æµå…¥å‡€é¢:"+jrzljlr
+		       +" ä»Šæ—¥ä¸»åŠ›å‡€æµå…¥å‡€å æ¯”:"+rateOfJrzljlr
+		       +" ä»Šæ—¥è¶…å¤§å•æµå…¥å‡€é¢:"+jrcddjlr
+		       +" ä»Šæ—¥è¶…å¤§å•æµå…¥å‡€å æ¯”:"+rateOfJrcddjlr
+		       +" ä»Šæ—¥å¤§å•æµå…¥å‡€é¢:"+jrddjlr
+		       +" ä»Šæ—¥å¤§å•æµå…¥å‡€å æ¯”:"+rateOfJrddjlr
+		       +" ä»Šæ—¥ä¸­å•æµå…¥å‡€é¢:"+jrzdjlr
+		       +" ä»Šæ—¥ä¸­å•æµå…¥å‡€å æ¯”"+rateOfJrzdjlr
+		       +" ä»Šæ—¥ä¸­å°æµå…¥å‡€é¢:"+jrxdjlr
+		       +" ä»Šæ—¥å°å•æµå…¥å‡€å æ¯”:"+rateOfJrxdjlr;	  
 	}
 }

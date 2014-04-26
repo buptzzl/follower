@@ -8,7 +8,7 @@ import java.net.URLEncoder;
 import java.util.Scanner;
 
 public class JasonUtil {
-	final static String AA1="{\"data\":[\"600739,1,1,ÁÉÄş³É´ó,15.44,3.90,9598Íò,13.72,7553Íò,10.80,2043Íò,2.92,-5208Íò,-7.44,-4388Íò,-6.27\",\"600787,1,1,ÖĞ´¢¹É·İ,15.23,2.63,1972Íò,9.37,975Íò,4.64,997Íò,4.74,-1046Íò,-4.97,-926Íò,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
+	final static String AA1="{\"data\":[\"600739,1,1,è¾½å®æˆå¤§,15.44,3.90,9598ä¸‡,13.72,7553ä¸‡,10.80,2043ä¸‡,2.92,-5208ä¸‡,-7.44,-4388ä¸‡,-6.27\",\"600787,1,1,ä¸­å‚¨è‚¡ä»½,15.23,2.63,1972ä¸‡,9.37,975ä¸‡,4.64,997ä¸‡,4.74,-1046ä¸‡,-4.97,-926ä¸‡,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
 	public static String retrieveData(String addressOfData)
 			throws UnsupportedEncodingException, MalformedURLException,
 			IOException {

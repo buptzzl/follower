@@ -15,18 +15,13 @@ import org.hibernate.Session;
 public interface CommonService {
 	
 	
-	/**
-	 * 获取�?��数据库表
-	 * @return
-	 */
-	
 	public Integer getAllDbTableSize();
 	public <T> void save(T entity);
 	public <T> void saveOrUpdate(T entity);
 	public <T> void delete(T entity);
 	public <T> void batchSave(List<T> entitys);
 	/**
-	 * 根据实体名称和主键获取实�?
+	 * 根据实体名称和主键获取实?
 	 * 
 	 * @param <T>
 	 * @param entityName
@@ -35,7 +30,7 @@ public interface CommonService {
 	 */
 	public <T> T get(Class<T> class1, Serializable id);
 	/**
-	 * 根据实体名称和主键获取实�?
+	 * 根据实体名称和主键获取实?
 	 * 
 	 * @param <T>
 	 * @param entityName
@@ -44,7 +39,7 @@ public interface CommonService {
 	 */
 	public <T> T getEntity(Class entityName, Serializable id);
 	/**
-	 * 根据实体名称和字段名称和字段值获取唯�?���?
+	 * 根据实体名称和字段名称和字段值获取唯?
 	 * @param <T>
 	 * @param entityClass
 	 * @param propertyName
@@ -53,7 +48,7 @@ public interface CommonService {
 	 */
 	public <T> T findUniqueByProperty(Class<T> entityClass, String propertyName, Object value);
 	/**
-	 * 按属性查找对象列�?
+	 * 按属性查找对象列
 	 */
 	public <T> List<T> findByProperty(Class<T> entityClass,String propertyName, Object value);
 	/**
@@ -82,7 +77,7 @@ public interface CommonService {
 	public <T> void deleteAllEntitie(Collection<T> entities);
 
 	/**
-	 * 更新指定的实�?
+	 * 更新指定的实?
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -114,7 +109,7 @@ public interface CommonService {
 	 */
 	public <T> List<T> findListbySql(String query);
 	/**
-	 * 通过属�?称获取实体带排序
+	 * 通过属称获取实体带排序
 	 * 
 	 * @param <T>
 	 * @param clas
@@ -146,33 +141,33 @@ public interface CommonService {
 	
 	/**
 	 * 通过JDBC查找对象集合
-	 * 使用指定的检索标准检索数据返回数�?
+	 * 使用指定的检索标准检索数据返回数?
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql,Object... objs);
 	
 	
 	/**
 	 * 通过JDBC查找对象集合
-	 * 使用指定的检索标准检索数据返回数�?
+	 * 使用指定的检索标准检索数据返回数?
 	 */
 	public Map<String, Object> findOneForJdbc(String sql,Object... objs);
 	
 	/**
-	 * 通过JDBC查找对象集合,带分�?
+	 * 通过JDBC查找对象集合,带分?
 	 * 使用指定的检索标准检索数据并分页返回数据
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql, int page, int rows);
 	
 
 	/**
-	 * 通过JDBC查找对象集合,带分�?
+	 * 通过JDBC查找对象集合,带分?
 	 * 使用指定的检索标准检索数据并分页返回数据
 	 */
 	public <T> List<T> findObjForJdbc(String sql, int page, int rows,Class<T> clazz) ;
 	
 	
 	/**
-	 * 使用指定的检索标准检索数据并分页返回数据-采用预处理方�?
+	 * 使用指定的检索标准检索数据并分页返回数据-采用预处理方?
 	 * 
 	 * @param criteria
 	 * @param firstResult
@@ -187,7 +182,7 @@ public interface CommonService {
 	 */
 	public Long getCountForJdbc(String  sql) ;
 	/**
-	 * 使用指定的检索标准检索数据并分页返回数据For JDBC-采用预处理方�?
+	 * 使用指定的检索标准检索数据并分页返回数据For JDBC-采用预处理方?
 	 * 
 	 */
 	public Long getCountForJdbcParam(String  sql,Object[] objs);

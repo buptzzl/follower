@@ -1,6 +1,6 @@
 package com.eaglesoft.stock.service;
 
-import com.eaglesoft.stock.core.common.dao.ZjlxOfStockDao;
+import com.eaglesoft.stock.core.common.dao.impl.ZjlxOfStockDao;
 import com.eaglesoft.stock.domainObjects.ZjlxAggregator;
 import com.eaglesoft.stock.parser.ZjlxDataParser;
 

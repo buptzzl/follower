@@ -3,7 +3,7 @@ package com.eaglesoft.stock.controller;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.eaglesoft.stock.core.common.dao.ZjlxOfStockDao;
+import com.eaglesoft.stock.core.common.dao.impl.ZjlxOfStockDao;
 import com.eaglesoft.stock.event.ZjlxStockEodEvent;
 import com.eaglesoft.stock.parser.ZjlxStockEodParser;
 import com.eaglesoft.stock.service.ZjlxOfStockService;

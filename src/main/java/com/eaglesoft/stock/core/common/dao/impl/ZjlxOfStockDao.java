@@ -1,4 +1,4 @@
-package com.eaglesoft.stock.core.common.dao;
+package com.eaglesoft.stock.core.common.dao.impl;
 
 import java.util.List;
 
