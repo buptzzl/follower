@@ -34,7 +34,7 @@ public class TopXDeltaAnalyzer {
     }
 
     public List<ZjlxStockRuntimeGroup> takeTopN(List<ZjlxStockRuntimeGroup> groups, int n) {
-       return  groups.subList(0, n-1);
+       return  groups.subList(0, n);
     }
 
     public List<ZjlxStockRuntimeGroup> sort( Map<String,ZjlxStockRuntimeGroup> groups) {
@@ -60,7 +60,7 @@ public class TopXDeltaAnalyzer {
             Collections.sort(list, new Comparator<ZjlxStockRuntime>() {
                 @Override
                 public int compare(ZjlxStockRuntime o1, ZjlxStockRuntime o2) {
-                    return o1.getExtractTime().compareTo(o2.getExtractTime());
+                    return o2.getExtractTime().compareTo(o1.getExtractTime());
                 }
             } );
            
@@ -119,6 +119,7 @@ public class TopXDeltaAnalyzer {
                 group = new ZjlxStockRuntimeGroup();
                 group.setCode(record.getCode());
                 group.setName(record.getName());
+                groups.put(record.getCode(), group);
             }
                    
             group.getZjlxStockRuntimes().add(record);

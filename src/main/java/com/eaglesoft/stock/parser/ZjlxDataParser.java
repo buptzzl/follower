@@ -19,12 +19,15 @@ public class ZjlxDataParser extends DataParser {
 	protected SimpleDateFormat dateFormat2=new SimpleDateFormat("yyyy-MM-dd");
 	
 	
-	
 	public <T> ZjlxAggregator<T> parse(String str) throws Exception{
+		return parse(str, new Date());
+	}
+	
+	public <T> ZjlxAggregator<T> parse(String str, Date now) throws Exception{
         JSONObject obj;
         ZjlxAggregator<T> aggregator = new ZjlxAggregator<T>();
         
-        Date now = new Date();
+       
         
 		try {
 			obj = new JSONObject(str);
