@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+ <session-factory>
+  <property name="dialect">
+   org.hibernate.dialect.Oracle10gDialect
+  </property>
+  <property name="connection.url">
+   jdbc:oracle:thin:@nothing
+  </property>
+  <property name="connection.username">SSECS_OWNER_26</property>
+  <property name="connection.password">SSECS_OWNER_26_SSENGD2</property>
+  <property name="connection.driver_class">
+   oracle.jdbc.driver.OracleDriver
+  </property>
+  <property name="format_sql">true</property>
+  <property name="show_sql">true</property>
+  <property name="jdbc.batch_size">100</property>
+  <property name="current_session_context_class">thread</property>
+  <mapping class="com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime" />
+  <mapping class="com.eaglesoft.stock.core.monitor.entity.ZjlxStockEod" />
+
+ </session-factory>
+
+</hibernate-configuration>

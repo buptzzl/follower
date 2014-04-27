@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+     
+	<bean id="controllerManager" class="com.eaglesoft.stock.controller.ControllerManager">
+		 <property name="controllerMapper" >
+			 <map>
+				<entry key="ZJLX_STOCK_RUNTIME" value-ref="zjlxStockRuntimeController" />
+				<entry key="ZJLX_STOCK_EOD" value-ref="zjlxStockEodController" />
+			</map>
+		 </property>
+	 </bean>
+ 
+ 
+ <bean id="zjlxStockEodController" class="com.eaglesoft.stock.controller.ZjlxStockEodController">
+	<property name="zjlxOfStockService" ref="zjlxOfStockService"></property>
+	<property name="parser" ref="zjlxStockEodParser"></property>
+ </bean>
+ 
+ 
+ <bean id="zjlxStockRuntimeController" class="com.eaglesoft.stock.controller.ZjlxStockRuntimeController">
+	<property name="zjlxOfStockService" ref="zjlxOfStockService"></property>
+	<property name="parser" ref="zjlxDataParser"></property>
+ </bean>
+ 
+
+</beans>
