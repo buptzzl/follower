@@ -6,15 +6,15 @@
 
  <session-factory>
   <property name="dialect">
-   org.hibernate.dialect.Oracle10gDialect
+   org.hibernate.dialect.SQLServerDialect
   </property>
   <property name="connection.url">
-   jdbc:oracle:thin:@nothing
+   jdbc:jtds:sqlserver://localhost:1433/jd_bpm
   </property>
-  <property name="connection.username">SSECS_OWNER_26</property>
-  <property name="connection.password">SSECS_OWNER_26_SSENGD2</property>
+  <property name="connection.username">sa</property>
+  <property name="connection.password">123456</property>
   <property name="connection.driver_class">
-   oracle.jdbc.driver.OracleDriver
+   net.sourceforge.jtds.jdbc.Driver
   </property>
   <property name="format_sql">true</property>
   <property name="show_sql">true</property>

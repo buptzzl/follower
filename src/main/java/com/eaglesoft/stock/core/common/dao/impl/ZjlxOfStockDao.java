@@ -6,7 +6,7 @@ import org.hibernate.Session;
 
 import com.eaglesoft.utils.hibernate.HibernateUtil;
 
-public class ZjlxOfStockDao {
+public class ZjlxOfStockDao extends GenericBaseCommonDao{
 
 	public <T> void  save( List<T> zjlxStockRuntimes) {
 		
@@ -24,4 +24,5 @@ public class ZjlxOfStockDao {
         }
         session.getTransaction().commit();
 	}
+
 }

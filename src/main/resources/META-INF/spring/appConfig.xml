@@ -12,40 +12,15 @@
 
 <import resource="classpath:META-INF/spring/daos.xml" />
 <import resource="classpath:META-INF/spring/services.xml" />
+<import resource="classpath:META-INF/spring/parsers.xml" />
+<import resource="classpath:META-INF/spring/controllers.xml" />
 <import resource="classpath:META-INF/spring/analyzers.xml" />
 <import resource="classpath:META-INF/spring/scheduled_jobs.xml" />
 
  <bean id="dispatcher" class="com.eaglesoft.stock.dispatcher.StockEventDispatcher">
 	 <property name="controllerManager" ref="controllerManager"></property>
  </bean>
- <bean id="controllerManager" class="com.eaglesoft.stock.controller.ControllerManager">
-	 <property name="controllerMapper" >
-		 <map>
-			<entry key="ZJLX_STOCK_RUNTIME" value-ref="zjlxStockRuntimeController" />
-			<entry key="ZJLX_STOCK_EOD" value-ref="zjlxStockEodController" />
-		</map>
-	 </property>
- </bean>
  
- 
- <bean id="zjlxStockEodController" class="com.eaglesoft.stock.controller.ZjlxStockEodController">
-	<property name="zjlxOfStockService" ref="zjlxOfStockService"></property>
-	<property name="parser" ref="zjlxStockEodParser"></property>
- </bean>
- 
- 
- <bean id="zjlxStockRuntimeController" class="com.eaglesoft.stock.controller.ZjlxStockRuntimeController">
-	<property name="zjlxOfStockService" ref="zjlxOfStockService"></property>
-	<property name="parser" ref="zjlxDataParser"></property>
- </bean>
- 
- 
- <bean id="zjlxStockEodParser" class="com.eaglesoft.stock.parser.ZjlxStockEodParser">
- </bean>
- 
- 
- <bean id="zjlxDataParser" class="com.eaglesoft.stock.parser.ZjlxDataParser">
- </bean>
  
  
  

@@ -13,8 +13,13 @@ public class JasonUtil {
 			throws UnsupportedEncodingException, MalformedURLException,
 			IOException {
 		return AA1;
-		/*
+		
 		// build a URL
+		//return openPage(addressOfData); 
+	}
+	private static String openPage(String addressOfData)
+			throws UnsupportedEncodingException, MalformedURLException,
+			IOException {
 		String s = addressOfData;
 		s += URLEncoder.encode("", "UTF-8");
 		URL url = new URL(s);
@@ -29,6 +34,6 @@ public class JasonUtil {
 
 		String jasonData = strBuffer.substring(strBuffer.indexOf("{"));
 		System.out.println("str2: " + jasonData);
-		return jasonData; 
-*/	}
+		return jasonData;
+	}
 }

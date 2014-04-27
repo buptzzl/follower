@@ -1,8 +1,10 @@
 package com.eaglesoft.stock.analyzer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +16,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.eaglesoft.stock.TestDataFactory;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntimeGroup;
-import com.eaglesoft.stock.dispatcher.StockEventDispatcher;
-import com.eaglesoft.stock.service.ZjlxOfStockService;
 
 public class TopXDeltaAnalyzerTest {
     
@@ -50,7 +50,17 @@ public class TopXDeltaAnalyzerTest {
 
     @Test
     public void testFindData() {
-        //this.zjlxOfStockService.getDao().
+    	List<ZjlxStockRuntime> list = topXDeltaAnalyzer.findData();
+    	assertThat(list.size(), equalTo(1));
+    	assertThat(list.get(0).getCode(), equalTo("600548"));
+    }
+    
+
+    @Test
+    public void testFindData2() {
+    	List<ZjlxStockRuntime> list = topXDeltaAnalyzer.findData2();
+    	assertThat(list.size(), equalTo(100));
+    	assertThat(list.get(0).getCode(), equalTo("600548"));
     }
 
     @Test

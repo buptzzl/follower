@@ -1,9 +1,10 @@
 package com.eaglesoft.stock.analyzer;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,20 @@ import java.util.Map;
 import com.eaglesoft.stock.core.common.dao.impl.ZjlxOfStockDao;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntimeGroup;
+import com.eaglesoft.utils.date.DateUtil;
 
 public class TopXDeltaAnalyzer {
     private ZjlxOfStockDao dao;
     
-    public  void analyze(){
+    public ZjlxOfStockDao getDao() {
+		return dao;
+	}
+
+	public void setDao(ZjlxOfStockDao dao) {
+		this.dao = dao;
+	}
+
+	public  void analyze(){
         List<ZjlxStockRuntime> list = findData();
         Map<String,ZjlxStockRuntimeGroup>  zjlxRuntimeGroups = group(list);
         caculateDelta(zjlxRuntimeGroups);
@@ -74,9 +84,28 @@ public class TopXDeltaAnalyzer {
         
     }
 
-    public <T> List<T> findData() {
-        return null;
+    @SuppressWarnings("unchecked")
+	public <T> List<T> findData() {
+    	
+    	String hsqlQuery = "from ZjlxStockRuntime as runtime where runtime.code=? ";
+        return (List<T>) dao.findByQueryString(hsqlQuery, "600548");
         //
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <T> List<T> findData2() {
+    	
+    	String hsqlQuery = "from ZjlxStockRuntime as runtime where runtime.extractTime >=? and runtime.extractTime <=? ";
+    	Date startDate = null;
+    	Date endDate = null;
+    	try {
+			startDate = DateUtil.DF_YYYY_MM_DD_HH_MI_SS.parse("2014-04-27 08:00:00");
+			endDate = DateUtil.DF_YYYY_MM_DD_HH_MI_SS.parse("2014-04-27 10:00:00");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+        return (List<T>) dao.findByQueryString(hsqlQuery, startDate,endDate);
     }
     
     

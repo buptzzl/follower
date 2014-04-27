@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.persistence.Table;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -27,38 +28,43 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.Assert;
 
-import com.eaglesoft.stock.core.common.dao.IGenericBaseCommonDao;
+import com.eaglesoft.stock.core.common.dao.ICommonDao;
 import com.eaglesoft.stock.core.common.dao.SQLBuilder;
+import com.eaglesoft.utils.hibernate.HibernateUtil;
 
 
 /**
  * 
  * 类描述： DAO层泛型基类
  * 
- * @author dingsoft
+ * @author eaglesoft
  * @date： 日期：2012-12-7 时间：上午10:16:48
  * @param <T>
  * @param <PK>
  * @version 1.0
  */
 @SuppressWarnings("hiding")
-public abstract class GenericBaseCommonDao<T, PK extends Serializable> implements IGenericBaseCommonDao {
+public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommonDao<T, PK>  {
 	/**
 	 * 初始化Log4j的一个实例
 	 */
-	private static final Logger logger = Logger.getLogger(GenericBaseCommonDao.class);
-	/**
-	 * 注入一个sessionFactory属性,并注入到父类(HibernateDaoSupport)
-	 * **/
-	@Autowired
-	@Qualifier("sessionFactory")
-	private SessionFactory sessionFactory;
+	private static final Logger logger = LogManager.getLogger(GenericBaseCommonDao.class);
 
+	@Autowired
+	@Qualifier("jdbcTemplate")
+	private JdbcTemplate jdbcTemplate;
+	
+
+	
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getSession()
+	 */
 	public Session getSession() {
-		// 事务必须是开启的(Required)，否则获取不到
+		return HibernateUtil.getSession();
+		/*// 事务必须是开启的(Required)，否则获取不到
 		Session session = sessionFactory.getCurrentSession();
 		//session.enableFilter("DelFlag").setParameter("delFlag", 0);
-		return session;
+		return session;*/
 	}
 
 	/**
@@ -68,7 +74,7 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 	 *            注解的实体类
 	 */
 	private <T> void getProperty(Class entityName) {
-		ClassMetadata cm = sessionFactory.getClassMetadata(entityName);
+		ClassMetadata cm = getSession().getSessionFactory().getClassMetadata(entityName);
 		String[] str = cm.getPropertyNames(); // 获得该类所有的属性名称
 		for (int i = 0; i < str.length; i++) {
 			String property = str[i];
@@ -77,9 +83,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		}
 	}
 	
-	/**
-	 * 获取所有数据表
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getAllDbTableSize()
 	 */
 	public Integer getAllDbTableSize() {
 		SessionFactory factory = getSession().getSessionFactory();
@@ -87,28 +92,24 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return metaMap.size();
 	}
 
-	/**
-	 * 根据实体名字获取唯一记录
-	 * 
-	 * @param propertyName
-	 * @param value
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findUniqueByProperty(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
 	public <T> T findUniqueByProperty(Class<T> entityClass, String propertyName, Object value) {
 		Assert.hasText(propertyName);
 		return (T) createCriteria(entityClass, Restrictions.eq(propertyName, value)).uniqueResult();
 	}
 
-	/**
-	 * 按属性查找对象列表.
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findByProperty(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
 	public <T> List<T> findByProperty(Class<T> entityClass, String propertyName, Object value) {
 		Assert.hasText(propertyName);
 		return (List<T>) createCriteria(entityClass, Restrictions.eq(propertyName, value)).list();
 	}
 
-	/**
-	 * 根据传入的实体持久化对象
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#save(T)
 	 */
 	public <T> void save(T entity) {
 		try {
@@ -123,10 +124,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
 	}
 
-	/**
-	 * 批量保存数据
-	 * @param <T>
-	 * @param entitys 要持久化的临时实体对象集合
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#batchSave(java.util.List)
 	 */
 	public <T> void batchSave(List<T> entitys) {
 		for (int i=0; i<entitys.size();i++) {
@@ -138,12 +137,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 			
 		}
 	}
-	/**
-	 * 根据传入的实体添加或更新对象
-	 * 
-	 * @param <T>
-	 * 
-	 * @param entity
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#saveOrUpdate(T)
 	 */
 
 	public <T> void saveOrUpdate(T entity) {
@@ -158,8 +153,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		}
 	}
 
-	/**
-	 * 根据传入的实体删除对象
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#delete(T)
 	 */
 	public <T> void delete(T entity) {
 		try {
@@ -173,11 +168,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		}
 	}
 
-	/**
-	 * 根据主键删除指定的实体
-	 * 
-	 * @param <T>
-	 * @param pojo
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#deleteEntityById(java.lang.Class, java.io.Serializable)
 	 */
 	public <T> void deleteEntityById(Class entityName, Serializable id) {
 		Table table = (Table) entityName.getAnnotation(Table.class);
@@ -192,12 +184,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		//delete(get(entityName, id));
 	}
 
-	/**
-	 * 删除全部的实体
-	 * 
-	 * @param <T>
-	 * 
-	 * @param entitys
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#deleteAllEntitie(java.util.Collection)
 	 */
 	public <T> void deleteAllEntitie(Collection<T> entitys) {
 		for (Object entity : entitys) {
@@ -205,8 +193,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		}
 	}
 
-	/**
-	 * 根据Id获取对象。
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#get(java.lang.Class, java.io.Serializable)
 	 */
 	public <T> T get(Class<T> entityClass, final Serializable id) {
 
@@ -214,14 +202,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
 	}
 
-	/**
-	 * 根据主键获取实体并加锁。
-	 * 
-	 * @param <T>
-	 * @param entityName
-	 * @param id
-	 * @param lock
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getEntity(java.lang.Class, java.io.Serializable)
 	 */
 	public <T> T getEntity(Class entityName, Serializable id) {
 
@@ -232,39 +214,29 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return t;
 	}
 
-	/**
-	 * 更新指定的实体
-	 * 
-	 * @param <T>
-	 * @param pojo
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#updateEntitie(T)
 	 */
 	public <T> void updateEntitie(T pojo) {
 		getSession().update(pojo);
 	}
 
-	/**
-	 * 更新指定的实体
-	 * 
-	 * @param <T>
-	 * @param pojo
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#updateEntitie(java.lang.String, java.lang.Object)
 	 */
 	public <T> void updateEntitie(String className, Object id) {
 		getSession().update(className, id);
 	}
 
-	/**
-	 * 根据主键更新实体
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#updateEntityById(java.lang.Class, java.io.Serializable)
 	 */
 	public <T> void updateEntityById(Class entityName, Serializable id) {
 		updateEntitie(get(entityName, id));
 	}
 
-	/**
-	 * 通过hql 查询语句查找对象
-	 * 
-	 * @param <T>
-	 * @param hql
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findByQueryString(java.lang.String, java.lang.Object)
 	 */
 	public List<T> findByQueryString(final String hql,Object...obj) {
 
@@ -277,13 +249,9 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
 	}
 	
-	 /**
-     * 获取得到HQLQuery对象
-     * 
-     * @param hql
-     * @param values
-     * @return
-     */
+	 /* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#createHQLQuery(java.lang.String, java.lang.Object)
+	 */
     public Query createHQLQuery(String hql, Object... values)  {
         //Assert.hasText(sql);
         Query queryObject = null;
@@ -297,13 +265,9 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
         return queryObject;
     }
 	
-	 /**
-     * 获取得到SQLQuery对象
-     * 
-     * @param sql
-     * @param values
-     * @return
-     */
+	 /* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#createSQLQuery(java.lang.String, java.lang.Object)
+	 */
     public SQLQuery createSQLQuery(String sql, Object... values)  {
         //Assert.hasText(sql);
         SQLQuery queryObject = null;
@@ -320,12 +284,9 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
     
    
-    /**
-     * 获取SQLBuilder中query对象，
-     * 
-     * @param sqlBuilder
-     * @return
-     */
+    /* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getQuery(com.eaglesoft.stock.core.common.dao.SQLBuilder)
+	 */
     @Override
     public Query getQuery(SQLBuilder sqlBuilder) {
         Query query = null;
@@ -334,12 +295,9 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
         return query;
     }
 
-    /**
-     * 获取SQLBuilder中query对象，
-     * 
-     * @param sqlBuilder
-     * @return
-     */
+    /* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getSQLQuery(com.eaglesoft.stock.core.common.dao.SQLBuilder)
+	 */
     @Override
     public SQLQuery getSQLQuery(SQLBuilder sqlBuilder) {
         SQLQuery query = null;
@@ -349,12 +307,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
     }
     
 
-	/**
-	 * 通过hql查询唯一对象
-	 * 
-	 * @param <T>
-	 * @param query
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#singleResult(java.lang.String, java.lang.Object)
 	 */
 	public <T> T singleResult(String hql,Object... params) {
 		T t = null;
@@ -369,12 +323,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return t;
 	}
 
-	/**
-	 * 通过hql 查询语句查找HashMap对象
-	 * 
-	 * @param <T>
-	 * @param query
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getHashMapbyQuery(java.lang.String)
 	 */
 	public Map<Object, Object> getHashMapbyQuery(String hql) {
 
@@ -389,12 +339,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
 	}
 
-	/**
-	 * 通过sql更新记录
-	 * 
-	 * @param <T>
-	 * @param query
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#updateBySqlString(java.lang.String)
 	 */
 	public int updateBySqlString(final String query) {
 
@@ -402,12 +348,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return querys.executeUpdate();
 	}
 
-	/**
-	 * 通过sql查询语句查找对象
-	 * 
-	 * @param <T>
-	 * @param query
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findListbySql(java.lang.String)
 	 */
 	public List<T> findListbySql(final String sql) {
 		Query querys = getSession().createSQLQuery(sql);
@@ -450,6 +392,9 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return criteria;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#loadAll(java.lang.Class)
+	 */
 	public <T> List<T> loadAll(final Class<T> entityClass) {
 		Criteria criteria = createCriteria(entityClass);
 		return (List<T>) criteria.list();
@@ -468,16 +413,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return criteria;
 	}
 
-	/**
-	 * 根据属性名和属性值查询. 有排序
-	 * 
-	 * @param <T>
-	 * @param entityClass
-	 * @param propertyName
-	 * @param value
-	 * @param orderBy
-	 * @param isAsc
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findByPropertyisOrder(java.lang.Class, java.lang.String, java.lang.Object, boolean)
 	 */
 	public <T> List<T> findByPropertyisOrder(Class<T> entityClass, String propertyName, Object value, boolean isAsc) {
 		Assert.hasText(propertyName);
@@ -514,12 +451,8 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 
 	
 
-	/**
-	 * 根据实体模版查找
-	 * 
-	 * @param entityName
-	 * @param exampleEntity
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findByExample(java.lang.String, java.lang.Object)
 	 */
 
 	public List findByExample(final String entityName, final Object exampleEntity) {
@@ -529,17 +462,14 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 		return executableCriteria.list();
 	}
 
-	/**
-	 * 调用存储过程
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#callableStatementByName(java.lang.String)
 	 */
 	public void callableStatementByName(String proc) {
 	}
 
-	/**
-	 * 查询指定实体的总记录数
-	 * 
-	 * @param clazz
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getCount(java.lang.Class)
 	 */
 	public int getCount(Class<T> clazz) {
 
@@ -548,42 +478,51 @@ public abstract class GenericBaseCommonDao<T, PK extends Serializable> implement
 	}
 
 	
-	@Autowired
-	@Qualifier("jdbcTemplate")
-	private JdbcTemplate jdbcTemplate;
 	
-
-	
-	/**
-	 * 使用指定的检索标准检索数据并分页返回数据For JDBC
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getCountForJdbc(java.lang.String)
 	 */
 	public Long getCountForJdbc(String  sql) {
 		return  this.jdbcTemplate.queryForLong(sql);
 	}
-	/**
-	 * 使用指定的检索标准检索数据并分页返回数据For JDBC-采用预处理方式
-	 * 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getCountForJdbcParam(java.lang.String, java.lang.Object[])
 	 */
 	public Long getCountForJdbcParam(String  sql,Object[] objs) {
 		return  this.jdbcTemplate.queryForLong(sql, objs);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findForJdbc(java.lang.String, java.lang.Object)
+	 */
 	public List<Map<String, Object>> findForJdbc(String sql, Object... objs) {
 		return this.jdbcTemplate.queryForList(sql,objs);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#executeSql(java.lang.String, java.util.List)
+	 */
 	public Integer executeSql(String sql,List<Object> param) {
 		return this.jdbcTemplate.update(sql,param);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#executeSql(java.lang.String, java.lang.Object)
+	 */
 	public Integer executeSql(String sql, Object... param) {
 		return this.jdbcTemplate.update(sql,param);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#countByJdbc(java.lang.String, java.lang.Object)
+	 */
 	public Integer countByJdbc(String sql, Object... param) {
 		return this.jdbcTemplate.queryForInt(sql, param);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#findOneForJdbc(java.lang.String, java.lang.Object)
+	 */
 	public Map<String, Object> findOneForJdbc(String sql, Object... objs) {
 		try{ 
 			return this.jdbcTemplate.queryForMap(sql, objs);
