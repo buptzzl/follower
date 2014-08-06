@@ -6,10 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class ServerSocketClient implements Runnable
 {
 	
-
+    private static final Logger logger = LogManager.getLogger(ServerSocketClient.class);
+    
 	private BufferedReader in;
 
 	private PrintWriter out;
@@ -114,10 +118,10 @@ public class ServerSocketClient implements Runnable
 				}
 			}
 			
-			System.out.println("done normally");
+			logger.info("done normally");
 		} catch (IOException e)
 		{
-			System.out.println("done with exception");
+		    logger.error("done with exception");
 			e.printStackTrace();
 			this.sendMessageOver();
 		}

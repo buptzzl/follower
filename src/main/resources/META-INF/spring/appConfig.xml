@@ -13,16 +13,13 @@
 <import resource="classpath:META-INF/spring/daos.xml" />
 <import resource="classpath:META-INF/spring/services.xml" />
 <import resource="classpath:META-INF/spring/parsers.xml" />
-<import resource="classpath:META-INF/spring/controllers.xml" />
 <import resource="classpath:META-INF/spring/analyzers.xml" />
+<import resource="classpath:META-INF/spring/controllers.xml" />
+<import resource="classpath:META-INF/spring/tasks.xml" />
 <import resource="classpath:META-INF/spring/scheduled_jobs.xml" />
 
  <bean id="dispatcher" class="com.eaglesoft.stock.dispatcher.StockEventDispatcher">
 	 <property name="controllerManager" ref="controllerManager"></property>
  </bean>
- 
- 
- 
- 
  
 </beans>

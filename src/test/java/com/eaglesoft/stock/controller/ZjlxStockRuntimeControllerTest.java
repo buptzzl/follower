@@ -2,6 +2,8 @@ package com.eaglesoft.stock.controller;
 
 import static org.junit.Assert.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,6 +15,9 @@ import com.eaglesoft.stock.parser.ZjlxDataParser;
 import com.eaglesoft.stock.service.ZjlxOfStockService;
 
 public class ZjlxStockRuntimeControllerTest {
+    
+    private static final Logger logger = LogManager.getLogger(ZjlxStockRuntimeControllerTest.class);
+    
 	ZjlxStockRuntimeController controller;
 
 	@Before
@@ -21,6 +26,7 @@ public class ZjlxStockRuntimeControllerTest {
 				"classpath:META-INF/spring/daos.xml",
 				"classpath:META-INF/spring/services.xml",
 				"classpath:META-INF/spring/parsers.xml",
+				"classpath:META-INF/spring/analyzers.xml",
 				"classpath:META-INF/spring/controllers.xml",
 		};
 		 ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(configFiles);
@@ -35,7 +41,7 @@ public class ZjlxStockRuntimeControllerTest {
 
 		controller.process(new ZjlxStockRuntimeEvent());
 
-		System.out.print("time spent:"
+		logger.info("time spent:"
 				+ (System.currentTimeMillis() - startTime));
 
 	}
@@ -55,7 +61,7 @@ public class ZjlxStockRuntimeControllerTest {
 
 		controller.process(new ZjlxStockRuntimeEvent());
 
-		System.out.print("time spent:"
+		logger.info("time spent:"
 				+ (System.currentTimeMillis() - startTime));
 
 	}

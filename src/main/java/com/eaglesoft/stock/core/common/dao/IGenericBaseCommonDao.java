@@ -13,15 +13,15 @@ import org.springframework.dao.DataAccessException;
 
 /**
  * 
- * ç±»æè¿°ï¼šDAOå±‚æ³›å‹åŸºç±»æ¥å£
+ * ÀàÃèÊö£ºDAO²ã·ºĞÍ»ùÀà½Ó¿Ú
  * 
  * @author dingsoft
- * @dateï¼š æ—¥æœŸï¼š2012-12-8 æ—¶é—´ï¼šä¸‹åˆ05:37:33
+ * @date£º ÈÕÆÚ£º2012-12-8 Ê±¼ä£ºÏÂÎç05:37:33
  * @version 1.0
  */
 public interface IGenericBaseCommonDao {
 	/**
-	 * è·å–æ‰€æœ‰æ•°æ®åº“è¡¨
+	 * »ñÈ¡ËùÓĞÊı¾İ¿â±í
 	 * @return
 	 */
 	
@@ -32,7 +32,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void saveOrUpdate(T entity);
 
 	/**
-	 * åˆ é™¤å®ä½“
+	 * É¾³ıÊµÌå
 	 * 
 	 * @param <T>
 	 * 
@@ -44,7 +44,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void delete(T entitie);
 
 	/**
-	 * æ ¹æ®å®ä½“åç§°å’Œä¸»é”®è·å–å®ä½“
+	 * ¸ù¾İÊµÌåÃû³ÆºÍÖ÷¼ü»ñÈ¡ÊµÌå
 	 * 
 	 * @param <T>
 	 * @param entityName
@@ -54,7 +54,7 @@ public interface IGenericBaseCommonDao {
 	public <T> T get(Class<T> entityName, Serializable id);
 
 	/**
-	 * æ ¹æ®å®ä½“åå­—è·å–å”¯ä¸€è®°å½•
+	 * ¸ù¾İÊµÌåÃû×Ö»ñÈ¡Î¨Ò»¼ÇÂ¼
 	 * 
 	 * @param propertyName
 	 * @param value
@@ -63,11 +63,11 @@ public interface IGenericBaseCommonDao {
 	public <T> T findUniqueByProperty(Class<T> entityClass, String propertyName, Object value);
 
 	/**
-	 * æŒ‰å±æ€§æŸ¥æ‰¾å¯¹è±¡åˆ—è¡¨.
+	 * °´ÊôĞÔ²éÕÒ¶ÔÏóÁĞ±í.
 	 */
 	public <T> List<T> findByProperty(Class<T> entityClass, String propertyName, Object value);
 	/**
-	 * åŠ è½½å…¨éƒ¨å®ä½“
+	 * ¼ÓÔØÈ«²¿ÊµÌå
 	 * @param <T>
 	 * @param entityClass
 	 * @return
@@ -75,7 +75,7 @@ public interface IGenericBaseCommonDao {
 	public <T> List<T> loadAll(final Class<T> entityClass);
 
 	/**
-	 * æ ¹æ®å®ä½“åç§°å’Œä¸»é”®è·å–å®ä½“
+	 * ¸ù¾İÊµÌåÃû³ÆºÍÖ÷¼ü»ñÈ¡ÊµÌå
 	 * 
 	 * @param <T>
 	 * 
@@ -89,7 +89,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void deleteEntityById(Class entityName, Serializable id);
 
 	/**
-	 * åˆ é™¤å®ä½“é›†åˆ
+	 * É¾³ıÊµÌå¼¯ºÏ
 	 * 
 	 * @param <T>
 	 * @param entities
@@ -97,7 +97,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void deleteAllEntitie(Collection<T> entities);
 
 	/**
-	 * æ›´æ–°æŒ‡å®šçš„å®ä½“
+	 * ¸üĞÂÖ¸¶¨µÄÊµÌå
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -107,7 +107,7 @@ public interface IGenericBaseCommonDao {
 	public <T> void updateEntityById(Class entityName, Serializable id);
 
 	/**
-	 * é€šè¿‡hql æŸ¥è¯¢è¯­å¥æŸ¥æ‰¾å¯¹è±¡
+	 * Í¨¹ıhql ²éÑ¯Óï¾ä²éÕÒ¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -116,7 +116,7 @@ public interface IGenericBaseCommonDao {
 	public <T> List<T> findByQueryString(String hql,Object...obj);
 
 	/**
-	 * é€šè¿‡hqlæŸ¥è¯¢å”¯ä¸€å¯¹è±¡
+	 * Í¨¹ıhql²éÑ¯Î¨Ò»¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -125,7 +125,7 @@ public interface IGenericBaseCommonDao {
 	public <T> T singleResult(String hql,Object...params);
 
 	/**
-	 * æ ¹æ®sqlæ›´æ–°
+	 * ¸ù¾İsql¸üĞÂ
 	 * 
 	 * @param query
 	 * @return
@@ -133,7 +133,7 @@ public interface IGenericBaseCommonDao {
 	public int updateBySqlString(String sql);
 
 	/**
-	 * æ ¹æ®sqlæŸ¥æ‰¾List
+	 * ¸ù¾İsql²éÕÒList
 	 * 
 	 * @param <T>
 	 * @param query
@@ -142,7 +142,7 @@ public interface IGenericBaseCommonDao {
 	public <T> List<T> findListbySql(String query);
 
 	/**
-	 * é€šè¿‡å±æ€§ç§°è·å–å®ä½“å¸¦æ’åº
+	 * Í¨¹ıÊôĞÔ³Æ»ñÈ¡ÊµÌå´øÅÅĞò
 	 * 
 	 * @param <T>
 	 * @param clas
@@ -153,7 +153,7 @@ public interface IGenericBaseCommonDao {
 	public Session getSession();
 	public List findByExample(final String entityName, final Object exampleEntity);
 	/**
-	 * é€šè¿‡hql æŸ¥è¯¢è¯­å¥æŸ¥æ‰¾HashMapå¯¹è±¡
+	 * Í¨¹ıhql ²éÑ¯Óï¾ä²éÕÒHashMap¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -164,45 +164,45 @@ public interface IGenericBaseCommonDao {
 	
 
 	/**
-	 * æ‰§è¡ŒSQL
+	 * Ö´ĞĞSQL
 	 */
 	public Integer executeSql(String sql, List<Object> param);
 	
 	/**
-	 * æ‰§è¡ŒSQL
+	 * Ö´ĞĞSQL
 	 */
 	public Integer executeSql(String sql, Object... param);
 	
 	
 	/**
-	 * é€šè¿‡JDBCæŸ¥æ‰¾å¯¹è±¡é›†åˆ
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®è¿”å›æ•°æ®
+	 * Í¨¹ıJDBC²éÕÒ¶ÔÏó¼¯ºÏ
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ·µ»ØÊı¾İ
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql,Object... objs);
 	
 	
 	/**
-	 * é€šè¿‡JDBCæŸ¥æ‰¾å¯¹è±¡é›†åˆ
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®è¿”å›æ•°æ®
+	 * Í¨¹ıJDBC²éÕÒ¶ÔÏó¼¯ºÏ
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ·µ»ØÊı¾İ
 	 */
 	public Map<String, Object> findOneForJdbc(String sql,Object... objs);
 	
 	/**
-	 * é€šè¿‡JDBCæŸ¥æ‰¾å¯¹è±¡é›†åˆ,å¸¦åˆ†é¡µ
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®
+	 * Í¨¹ıJDBC²éÕÒ¶ÔÏó¼¯ºÏ,´ø·ÖÒ³
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İ
 	 */
 	public List<Map<String, Object>> findForJdbc(String sql, int page, int rows);
 	
 
 	/**
-	 * é€šè¿‡JDBCæŸ¥æ‰¾å¯¹è±¡é›†åˆ,å¸¦åˆ†é¡µ
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®
+	 * Í¨¹ıJDBC²éÕÒ¶ÔÏó¼¯ºÏ,´ø·ÖÒ³
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İ
 	 */
 	public <T> List<T> findObjForJdbc(String sql, int page, int rows,Class<T> clazz) ;
 	
 	
 	/**
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®-é‡‡ç”¨é¢„å¤„ç†æ–¹å¼
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İ-²ÉÓÃÔ¤´¦Àí·½Ê½
 	 * 
 	 * @param criteria
 	 * @param firstResult
@@ -213,18 +213,18 @@ public interface IGenericBaseCommonDao {
 	public List<Map<String, Object>> findForJdbcParam(String  sql,  int page, int rows,Object... objs);
 	
 	/**
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®For JDBC
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İFor JDBC
 	 */
 	public Long getCountForJdbc(String  sql) ;
 	/**
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®For JDBC-é‡‡ç”¨é¢„å¤„ç†æ–¹å¼
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İFor JDBC-²ÉÓÃÔ¤´¦Àí·½Ê½
 	 * 
 	 */
 	public Long getCountForJdbcParam(String  sql,Object[] objs);
 	
 	//add by luos
 	/**
-     * è·å–å¾—åˆ°SQLQueryå¯¹è±¡
+     * »ñÈ¡µÃµ½SQLQuery¶ÔÏó
      * 
      * @param sql
      * @param values
@@ -234,7 +234,7 @@ public interface IGenericBaseCommonDao {
 
 
     /**
-     * è·å–å¾—åˆ°HQLQueryå¯¹è±¡
+     * »ñÈ¡µÃµ½HQLQuery¶ÔÏó
      * 
      * @param sql
      * @param values
@@ -243,7 +243,7 @@ public interface IGenericBaseCommonDao {
     public Query createHQLQuery(String hql, Object... values) ; 
     
     /**
-     * è·å–SQLBuilderä¸­queryå¯¹è±¡ï¼Œ
+     * »ñÈ¡SQLBuilderÖĞquery¶ÔÏó£¬
      * 
      * @param sqlBuilder
      * @return
@@ -251,14 +251,14 @@ public interface IGenericBaseCommonDao {
     public Query getQuery(SQLBuilder sqlBuilder);
 
     /**
-     * è·å–SQLBuilderä¸­queryå¯¹è±¡ï¼Œ
+     * »ñÈ¡SQLBuilderÖĞquery¶ÔÏó£¬
      * 
      * @param sqlBuilder
      * @return
      */
     public SQLQuery getSQLQuery(SQLBuilder sqlBuilder);
     /**
-     * æä¾›åŸºäºQueryå¯¹è±¡çš„åˆ†é¡µæŸ¥è¯¢ï¼Œédategridåœºåˆè¯·ä½¿ç”¨æ­¤åˆ†é¡µæ–¹æ³•
+     * Ìá¹©»ùÓÚQuery¶ÔÏóµÄ·ÖÒ³²éÑ¯£¬·Çdategrid³¡ºÏÇëÊ¹ÓÃ´Ë·ÖÒ³·½·¨
      * 
      * @param query
      * @return

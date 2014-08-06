@@ -13,9 +13,9 @@ import com.eaglesoft.stock.parser.ZjlxDataParser;
 
 public class ZjlxRecordTest extends TestCase {
 	
-	final static String AA1="{\"data\":[\"600739,1,1,è¾½å®æˆå¤§,15.44,3.90,9596ä¸‡,13.72,7553ä¸‡,10.80,2043ä¸‡,2.92,-5208ä¸‡,-7.44,-4388ä¸‡,-6.27\",\"600787,1,1,ä¸­å‚¨è‚¡ä»½,15.23,2.63,1972ä¸‡,9.37,975ä¸‡,4.64,997ä¸‡,4.74,-1046ä¸‡,-4.97,-926ä¸‡,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
-	final static String BB1="600739,1,1,è¾½å®æˆå¤§,15.44,3.90,9596ä¸‡,13.72,7553ä¸‡,10.80,2043ä¸‡,2.92,-5208ä¸‡,-7.44,-4388ä¸‡,-6.27";
-	final static String EXAMPLE_TING_PAI="002405,2,4,å››ç»´å›¾æ–°,-,0.00,0,0.00,0,0.00,0,0.00,0,0.00,0,0.00";
+	final static String AA1="{\"data\":[\"600739,1,1,ÁÉÄş³É´ó,15.44,3.90,9596Íò,13.72,7553Íò,10.80,2043Íò,2.92,-5208Íò,-7.44,-4388Íò,-6.27\",\"600787,1,1,ÖĞ´¢¹É·İ,15.23,2.63,1972Íò,9.37,975Íò,4.64,997Íò,4.74,-1046Íò,-4.97,-926Íò,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
+	final static String BB1="600739,1,1,ÁÉÄş³É´ó,15.44,3.90,9596Íò,13.72,7553Íò,10.80,2043Íò,2.92,-5208Íò,-7.44,-4388Íò,-6.27";
+	final static String EXAMPLE_TING_PAI="002405,2,4,ËÄÎ¬Í¼ĞÂ,-,0.00,0,0.00,0,0.00,0,0.00,0,0.00,0,0.00";
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
@@ -23,7 +23,7 @@ public class ZjlxRecordTest extends TestCase {
 	public void testParse() {
 		ZjlxStockRuntime record = new ZjlxDataParser().parseAsRecord(BB1);
 		assertThat(record.getCode(),equalTo("600739"));
-		assertThat(record.getName(),equalTo("è¾½å®æˆå¤§"));
+		assertThat(record.getName(),equalTo("ÁÉÄş³É´ó"));
 		assertThat(record.getLatestPrice().doubleValue(),equalTo(15.44));
 		assertThat(record.getJrzljlr().doubleValue(),equalTo(Double.valueOf(95960000l)));
 	}
@@ -31,20 +31,20 @@ public class ZjlxRecordTest extends TestCase {
 	public void testParseTheDataForTingPai() {
 		ZjlxStockRuntime record = new ZjlxDataParser().parseAsRecord(EXAMPLE_TING_PAI);
 		assertThat(record.getCode(),equalTo("002405"));
-		assertThat(record.getName(),equalTo("å››ç»´å›¾æ–°"));
+		assertThat(record.getName(),equalTo("ËÄÎ¬Í¼ĞÂ"));
 		assertThat(record.getLatestPrice().doubleValue(),equalTo(0d));
 		assertThat(record.getJrzljlr().doubleValue(),equalTo(Double.valueOf(0d)));
 	}
 	
 	public void testToBigDecimal() {
 		assertEquals(BigDecimal.valueOf(10.1),ZjlxDataParser.toBigDecimal("10.1"));
-		assertEquals(105100,ZjlxDataParser.toBigDecimal("10.51ä¸‡").doubleValue(),1 );
-		assertEquals(5100,ZjlxDataParser.toBigDecimal("0.51ä¸‡").doubleValue(),1 );
-		assertEquals(10000,ZjlxDataParser.toBigDecimal("1ä¸‡").doubleValue(),1 );
-		assertEquals(95960000,ZjlxDataParser.toBigDecimal("9596ä¸‡").doubleValue(),1 );
-		assertEquals(95960000,ZjlxDataParser.toBigDecimal("9596ä¸‡").doubleValue(),1 );
-		assertEquals(100000000l,ZjlxDataParser.toBigDecimal("1äº¿").doubleValue(),1 );
-		assertEquals(-52540000l,ZjlxDataParser.toBigDecimal("-5254äº¿").doubleValue(),1 );
+		assertEquals(105100,ZjlxDataParser.toBigDecimal("10.51Íò").doubleValue(),1 );
+		assertEquals(5100,ZjlxDataParser.toBigDecimal("0.51Íò").doubleValue(),1 );
+		assertEquals(10000,ZjlxDataParser.toBigDecimal("1Íò").doubleValue(),1 );
+		assertEquals(95960000,ZjlxDataParser.toBigDecimal("9596Íò").doubleValue(),1 );
+		assertEquals(95960000,ZjlxDataParser.toBigDecimal("9596Íò").doubleValue(),1 );
+		assertEquals(100000000l,ZjlxDataParser.toBigDecimal("1ÒÚ").doubleValue(),1 );
+		assertEquals(-52540000l,ZjlxDataParser.toBigDecimal("-5254ÒÚ").doubleValue(),1 );
 	}
 
 }

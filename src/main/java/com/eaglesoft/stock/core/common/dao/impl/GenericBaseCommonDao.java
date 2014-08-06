@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.ScrollMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -32,54 +33,32 @@ import com.eaglesoft.stock.core.common.dao.ICommonDao;
 import com.eaglesoft.stock.core.common.dao.SQLBuilder;
 import com.eaglesoft.utils.hibernate.HibernateUtil;
 
-
-/**
- * 
- * 类描述： DAO层泛型基类
- * 
- * @author eaglesoft
- * @date： 日期：2012-12-7 时间：上午10:16:48
- * @param <T>
- * @param <PK>
- * @version 1.0
- */
 @SuppressWarnings("hiding")
 public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommonDao<T, PK>  {
-	/**
-	 * 初始化Log4j的一个实例
-	 */
+	
 	private static final Logger logger = LogManager.getLogger(GenericBaseCommonDao.class);
 
-	@Autowired
-	@Qualifier("jdbcTemplate")
+	
 	private JdbcTemplate jdbcTemplate;
 	
 
 	
-	/* (non-Javadoc)
-	 * @see com.eaglesoft.stock.core.common.dao.impl.ICommonDao#getSession()
-	 */
 	public Session getSession() {
 		return HibernateUtil.getSession();
-		/*// 事务必须是开启的(Required)，否则获取不到
+		/*
 		Session session = sessionFactory.getCurrentSession();
 		//session.enableFilter("DelFlag").setParameter("delFlag", 0);
 		return session;*/
 	}
 
-	/**
-	 * 获得该类的属性和类型
-	 * 
-	 * @param entityName
-	 *            注解的实体类
-	 */
+	
 	private <T> void getProperty(Class entityName) {
 		ClassMetadata cm = getSession().getSessionFactory().getClassMetadata(entityName);
-		String[] str = cm.getPropertyNames(); // 获得该类所有的属性名称
+		String[] str = cm.getPropertyNames(); 
 		for (int i = 0; i < str.length; i++) {
 			String property = str[i];
-			String type = cm.getPropertyType(property).getName(); // 获得该名称的类型
-			System.out.println(property + "---&gt;" + type);
+			String type = cm.getPropertyType(property).getName(); 
+			logger.info(property + "---&gt;" + type);
 		}
 	}
 	
@@ -115,10 +94,10 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 		try {
 			getSession().save(entity);
 			if (logger.isDebugEnabled()) {
-				logger.debug("保存实体成功," + entity.getClass().getName());
+				logger.debug("???????????��??????," + entity.getClass().getName());
 			}
 		} catch (RuntimeException e) {
-			logger.error("保存实体异常", e);
+			logger.error("???????????��??????", e);
 			throw e;
 		}
 
@@ -131,7 +110,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 		for (int i=0; i<entitys.size();i++) {
 			getSession().save(entitys.get(i));
 //			if (i % 20 == 0) {
-//				//20个对象后才清理缓存，写入数据库
+//				
 //				getSession().clear();
 //			}
 			
@@ -145,7 +124,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 		try {
 			getSession().saveOrUpdate(entity);
 			if (logger.isDebugEnabled()) {
-				logger.debug("添加或更新成功," + entity.getClass().getName());
+				logger.debug("?��??????�C????�C��??????," + entity.getClass().getName());
 			}
 		} catch (RuntimeException e) {
 			logger.error("exception", e);
@@ -160,10 +139,10 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 		try {
 			getSession().delete(entity);
 			if (logger.isDebugEnabled()) {
-				logger.debug("删除成功," + entity.getClass().getName());
+				logger.debug("" + entity.getClass().getName());
 			}
 		} catch (RuntimeException e) {
-			logger.error("删除异常", e);
+			logger.error("", e);
 			throw e;
 		}
 	}
@@ -179,7 +158,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 			this.createSQLQuery(sql, id).executeUpdate();
 			logger.info("delete: " + entityName + ",id="+id);
 		}else{
-			throw new IllegalStateException("缺少必要的Hibernate 映射。" + entityName);
+			throw new IllegalStateException("" + entityName);
 		}
 		//delete(get(entityName, id));
 	}
@@ -240,7 +219,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	 */
 	public List<T> findByQueryString(final String hql,Object...obj) {
 
-		Query queryObject = createHQLQuery(hql,obj);
+		Query queryObject = createHQLQuery(hql,obj).setReadOnly(true);
 		List<T> list = queryObject.list();
 		if (list.size() > 0) {
 			getSession().flush();
@@ -318,7 +297,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 			getSession().flush();
 			t = list.get(0);
 		} else if (list.size() > 0) {
-			throw new RuntimeException("查询结果数:" + list.size() + "大于1");
+			throw new RuntimeException("" + list.size() + "?���???1");
 		}
 		return t;
 	}
@@ -357,7 +336,6 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	}
 
 	/**
-	 * 创建Criteria对象，有排序功能。
 	 * 
 	 * @param <T>
 	 * @param entityClass
@@ -377,7 +355,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	}
 
 	/**
-	 * 创建Criteria对象带属性比较
+	 
 	 * 
 	 * @param <T>
 	 * @param entityClass
@@ -401,7 +379,6 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	}
 
 	/**
-	 * 创建单一Criteria对象
 	 * 
 	 * @param <T>
 	 * @param entityClass
@@ -422,9 +399,6 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	}
 
 	/**
-	 * 根据属性名和属性值 查询 且要求对象唯一.
-	 * 
-	 * @return 符合条件的唯一对象.
 	 */
 //	public <T> T findUniqueBy(Class<T> entityClass, String propertyName, Object value) {
 //		Assert.hasText(propertyName);
@@ -434,8 +408,7 @@ public  class GenericBaseCommonDao<T, PK extends Serializable> implements ICommo
 	
 
 	/**
-	 * 批量插入实体
-	 * 
+	
 	 * @param clas
 	 * @param values
 	 * @return

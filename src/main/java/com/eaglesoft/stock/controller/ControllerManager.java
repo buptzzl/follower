@@ -21,12 +21,5 @@ public class ControllerManager {
 
 		return controllerMapper.get(event.getType());
 
-		/*
-		 * if(EventType.ZJLX_STOCK_RUNTIME.equals(event.getType())) { return new
-		 * ZjlxStockRuntimeController(); } else if
-		 * (EventType.ZJLX_STOCK_EOD.equals(event.getType())) { return new
-		 * ZjlxStockEodController(); } else { return null; }
-		 */
-
 	}
 }

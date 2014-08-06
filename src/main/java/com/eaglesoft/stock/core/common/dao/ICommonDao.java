@@ -15,13 +15,13 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract Session getSession();
 
 	/**
-	 * è·å–æ‰€æœ‰æ•°æ®è¡¨
+	 * »ñÈ¡ËùÓĞÊı¾İ±í
 	 * @return
 	 */
 	public abstract Integer getAllDbTableSize();
 
 	/**
-	 * æ ¹æ®å®ä½“åå­—è·å–å”¯ä¸€è®°å½•
+	 * ¸ù¾İÊµÌåÃû×Ö»ñÈ¡Î¨Ò»¼ÇÂ¼
 	 * 
 	 * @param propertyName
 	 * @param value
@@ -31,25 +31,25 @@ public interface ICommonDao<T, PK extends Serializable> {
 			String propertyName, Object value);
 
 	/**
-	 * æŒ‰å±æ€§æŸ¥æ‰¾å¯¹è±¡åˆ—è¡¨.
+	 * °´ÊôĞÔ²éÕÒ¶ÔÏóÁĞ±í.
 	 */
 	public abstract <T> List<T> findByProperty(Class<T> entityClass,
 			String propertyName, Object value);
 
 	/**
-	 * æ ¹æ®ä¼ å…¥çš„å®ä½“æŒä¹…åŒ–å¯¹è±¡
+	 * ¸ù¾İ´«ÈëµÄÊµÌå³Ö¾Ã»¯¶ÔÏó
 	 */
 	public abstract <T> void save(T entity);
 
 	/**
-	 * æ‰¹é‡ä¿å­˜æ•°æ®
+	 * ÅúÁ¿±£´æÊı¾İ
 	 * @param <T>
-	 * @param entitys è¦æŒä¹…åŒ–çš„ä¸´æ—¶å®ä½“å¯¹è±¡é›†åˆ
+	 * @param entitys Òª³Ö¾Ã»¯µÄÁÙÊ±ÊµÌå¶ÔÏó¼¯ºÏ
 	 */
 	public abstract <T> void batchSave(List<T> entitys);
 
 	/**
-	 * æ ¹æ®ä¼ å…¥çš„å®ä½“æ·»åŠ æˆ–æ›´æ–°å¯¹è±¡
+	 * ¸ù¾İ´«ÈëµÄÊµÌåÌí¼Ó»ò¸üĞÂ¶ÔÏó
 	 * 
 	 * @param <T>
 	 * 
@@ -59,12 +59,12 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> void saveOrUpdate(T entity);
 
 	/**
-	 * æ ¹æ®ä¼ å…¥çš„å®ä½“åˆ é™¤å¯¹è±¡
+	 * ¸ù¾İ´«ÈëµÄÊµÌåÉ¾³ı¶ÔÏó
 	 */
 	public abstract <T> void delete(T entity);
 
 	/**
-	 * æ ¹æ®ä¸»é”®åˆ é™¤æŒ‡å®šçš„å®ä½“
+	 * ¸ù¾İÖ÷¼üÉ¾³ıÖ¸¶¨µÄÊµÌå
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -72,7 +72,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> void deleteEntityById(Class entityName, Serializable id);
 
 	/**
-	 * åˆ é™¤å…¨éƒ¨çš„å®ä½“
+	 * É¾³ıÈ«²¿µÄÊµÌå
 	 * 
 	 * @param <T>
 	 * 
@@ -81,12 +81,12 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> void deleteAllEntitie(Collection<T> entitys);
 
 	/**
-	 * æ ¹æ®Idè·å–å¯¹è±¡ã€‚
+	 * ¸ù¾İId»ñÈ¡¶ÔÏó¡£
 	 */
 	public abstract <T> T get(Class<T> entityClass, final Serializable id);
 
 	/**
-	 * æ ¹æ®ä¸»é”®è·å–å®ä½“å¹¶åŠ é”ã€‚
+	 * ¸ù¾İÖ÷¼ü»ñÈ¡ÊµÌå²¢¼ÓËø¡£
 	 * 
 	 * @param <T>
 	 * @param entityName
@@ -97,7 +97,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> T getEntity(Class entityName, Serializable id);
 
 	/**
-	 * æ›´æ–°æŒ‡å®šçš„å®ä½“
+	 * ¸üĞÂÖ¸¶¨µÄÊµÌå
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -105,7 +105,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> void updateEntitie(T pojo);
 
 	/**
-	 * æ›´æ–°æŒ‡å®šçš„å®ä½“
+	 * ¸üĞÂÖ¸¶¨µÄÊµÌå
 	 * 
 	 * @param <T>
 	 * @param pojo
@@ -113,12 +113,12 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> void updateEntitie(String className, Object id);
 
 	/**
-	 * æ ¹æ®ä¸»é”®æ›´æ–°å®ä½“
+	 * ¸ù¾İÖ÷¼ü¸üĞÂÊµÌå
 	 */
 	public abstract <T> void updateEntityById(Class entityName, Serializable id);
 
 	/**
-	 * é€šè¿‡hql æŸ¥è¯¢è¯­å¥æŸ¥æ‰¾å¯¹è±¡
+	 * Í¨¹ıhql ²éÑ¯Óï¾ä²éÕÒ¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param hql
@@ -127,7 +127,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract List<T> findByQueryString(final String hql, Object... obj);
 
 	/**
-	 * è·å–å¾—åˆ°HQLQueryå¯¹è±¡
+	 * »ñÈ¡µÃµ½HQLQuery¶ÔÏó
 	 * 
 	 * @param hql
 	 * @param values
@@ -136,7 +136,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract Query createHQLQuery(String hql, Object... values);
 
 	/**
-	 * è·å–å¾—åˆ°SQLQueryå¯¹è±¡
+	 * »ñÈ¡µÃµ½SQLQuery¶ÔÏó
 	 * 
 	 * @param sql
 	 * @param values
@@ -145,7 +145,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract SQLQuery createSQLQuery(String sql, Object... values);
 
 	/**
-	 * è·å–SQLBuilderä¸­queryå¯¹è±¡ï¼Œ
+	 * »ñÈ¡SQLBuilderÖĞquery¶ÔÏó£¬
 	 * 
 	 * @param sqlBuilder
 	 * @return
@@ -153,7 +153,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract Query getQuery(SQLBuilder sqlBuilder);
 
 	/**
-	 * è·å–SQLBuilderä¸­queryå¯¹è±¡ï¼Œ
+	 * »ñÈ¡SQLBuilderÖĞquery¶ÔÏó£¬
 	 * 
 	 * @param sqlBuilder
 	 * @return
@@ -161,7 +161,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract SQLQuery getSQLQuery(SQLBuilder sqlBuilder);
 
 	/**
-	 * é€šè¿‡hqlæŸ¥è¯¢å”¯ä¸€å¯¹è±¡
+	 * Í¨¹ıhql²éÑ¯Î¨Ò»¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -170,7 +170,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> T singleResult(String hql, Object... params);
 
 	/**
-	 * é€šè¿‡hql æŸ¥è¯¢è¯­å¥æŸ¥æ‰¾HashMapå¯¹è±¡
+	 * Í¨¹ıhql ²éÑ¯Óï¾ä²éÕÒHashMap¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -179,7 +179,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract Map<Object, Object> getHashMapbyQuery(String hql);
 
 	/**
-	 * é€šè¿‡sqlæ›´æ–°è®°å½•
+	 * Í¨¹ısql¸üĞÂ¼ÇÂ¼
 	 * 
 	 * @param <T>
 	 * @param query
@@ -188,7 +188,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract int updateBySqlString(final String query);
 
 	/**
-	 * é€šè¿‡sqlæŸ¥è¯¢è¯­å¥æŸ¥æ‰¾å¯¹è±¡
+	 * Í¨¹ısql²éÑ¯Óï¾ä²éÕÒ¶ÔÏó
 	 * 
 	 * @param <T>
 	 * @param query
@@ -199,7 +199,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract <T> List<T> loadAll(final Class<T> entityClass);
 
 	/**
-	 * æ ¹æ®å±æ€§åå’Œå±æ€§å€¼æŸ¥è¯¢. æœ‰æ’åº
+	 * ¸ù¾İÊôĞÔÃûºÍÊôĞÔÖµ²éÑ¯. ÓĞÅÅĞò
 	 * 
 	 * @param <T>
 	 * @param entityClass
@@ -213,7 +213,7 @@ public interface ICommonDao<T, PK extends Serializable> {
 			String propertyName, Object value, boolean isAsc);
 
 	/**
-	 * æ ¹æ®å®ä½“æ¨¡ç‰ˆæŸ¥æ‰¾
+	 * ¸ù¾İÊµÌåÄ£°æ²éÕÒ
 	 * 
 	 * @param entityName
 	 * @param exampleEntity
@@ -224,12 +224,12 @@ public interface ICommonDao<T, PK extends Serializable> {
 			final Object exampleEntity);
 
 	/**
-	 * è°ƒç”¨å­˜å‚¨è¿‡ç¨‹
+	 * µ÷ÓÃ´æ´¢¹ı³Ì
 	 */
 	public abstract void callableStatementByName(String proc);
 
 	/**
-	 * æŸ¥è¯¢æŒ‡å®šå®ä½“çš„æ€»è®°å½•æ•°
+	 * ²éÑ¯Ö¸¶¨ÊµÌåµÄ×Ü¼ÇÂ¼Êı
 	 * 
 	 * @param clazz
 	 * @return
@@ -237,12 +237,12 @@ public interface ICommonDao<T, PK extends Serializable> {
 	public abstract int getCount(Class<T> clazz);
 
 	/**
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®For JDBC
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İFor JDBC
 	 */
 	public abstract Long getCountForJdbc(String sql);
 
 	/**
-	 * ä½¿ç”¨æŒ‡å®šçš„æ£€ç´¢æ ‡å‡†æ£€ç´¢æ•°æ®å¹¶åˆ†é¡µè¿”å›æ•°æ®For JDBC-é‡‡ç”¨é¢„å¤„ç†æ–¹å¼
+	 * Ê¹ÓÃÖ¸¶¨µÄ¼ìË÷±ê×¼¼ìË÷Êı¾İ²¢·ÖÒ³·µ»ØÊı¾İFor JDBC-²ÉÓÃÔ¤´¦Àí·½Ê½
 	 * 
 	 */
 	public abstract Long getCountForJdbcParam(String sql, Object[] objs);

@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.type.Type;
 
 /**
- * ä¸€ä¸ªæ„é€ æ¡ä»¶æŸ¥è¯¢çš„Builderæ¨¡å¼çš„å¯å˜æ¡ä»¶æŸ¥è¯¢æ„é€ å™¨. ä½¿ç”¨åœºæ™¯:å½“æŸ¥è¯¢æ¡ä»¶ä¸­çš„æ¡ä»¶ä¸ªæ•°æ˜¯åŠ¨æ€å˜åŒ–çš„æ—¶å€™,å¯ä½¿ç”¨æœ¬Builder é€‚ç”¨äº1 HQLå¯å˜æ¡ä»¶æŸ¥è¯¢;2 SQLå¯å˜æ¡ä»¶æŸ¥è¯¢. æ³¨æ„ä¸¤è€…ä¹‹é—´çš„æ¥å£å˜åŒ–
+ * Ò»¸ö¹¹ÔìÌõ¼ş²éÑ¯µÄBuilderÄ£Ê½µÄ¿É±äÌõ¼ş²éÑ¯¹¹ÔìÆ÷. Ê¹ÓÃ³¡¾°:µ±²éÑ¯Ìõ¼şÖĞµÄÌõ¼ş¸öÊıÊÇ¶¯Ì¬±ä»¯µÄÊ±ºò,¿ÉÊ¹ÓÃ±¾Builder ÊÊÓÃÓÚ1 HQL¿É±äÌõ¼ş²éÑ¯;2 SQL¿É±äÌõ¼ş²éÑ¯. ×¢ÒâÁ½ÕßÖ®¼äµÄ½Ó¿Ú±ä»¯
  */
 public class SQLBuilder {
 
@@ -56,7 +56,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è·å¾—åŸå§‹hqlè¯­å¥
+	 * »ñµÃÔ­Ê¼hqlÓï¾ä
 	 * 
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public class SQLBuilder {
 		if (hql.length() > 5 && hql.substring(hql.length() - 5).equalsIgnoreCase(WHERE)) {
 			return hql.substring(0, hql.length() - 5);
 		}
-		// æ£€æŸ¥whereåé¢æ˜¯å¦ç«‹å³è·Ÿæœ‰AND, å¦‚æœæœ‰, å»æ‰
+		// ¼ì²éwhereºóÃæÊÇ·ñÁ¢¼´¸úÓĞAND, Èç¹ûÓĞ, È¥µô
 		int whereIndex = hql.indexOf(WHERE);
 		if (whereIndex == -1) {
 			return hql;
@@ -76,14 +76,14 @@ public class SQLBuilder {
 			rightPart = rightPart.trim().substring(3);
 			return leftPart + " " + rightPart;
 		} else if (rightPart.trim().startsWith(ORDER_BY)) {
-			// å¦‚æœWHEREåç´§è·Ÿç€ORDER BY åˆ™åˆ é™¤WHERE
+			// Èç¹ûWHEREºó½ô¸ú×ÅORDER BY ÔòÉ¾³ıWHERE
 			return leftPart.substring(0, whereIndex) + rightPart;
 		}
 		return hql;
 	}
 
 	/**
-	 * è·å¾—åŸå§‹Sqlè¯­å¥
+	 * »ñµÃÔ­Ê¼SqlÓï¾ä
 	 * 
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è·å¾—æŸ¥è¯¢æ•°æ®åº“è®°å½•æ•°çš„hqlè¯­å¥ã€‚
+	 * »ñµÃ²éÑ¯Êı¾İ¿â¼ÇÂ¼ÊıµÄhqlÓï¾ä¡£
 	 * 
 	 * @return
 	 */
@@ -116,7 +116,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è·å¾—æŸ¥è¯¢æ•°æ®åº“è®°å½•æ•°çš„sqlè¯­å¥ã€‚
+	 * »ñµÃ²éÑ¯Êı¾İ¿â¼ÇÂ¼ÊıµÄsqlÓï¾ä¡£
 	 * 
 	 * @return
 	 */
@@ -130,8 +130,8 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * ä¿®æ”¹äººï¼šdumc æ—¶é—´ï¼š20130710 è·å¾—æŸ¥è¯¢æ•°æ®åº“è®°å½•æ•°çš„sqlè¯­å¥æ”¹è¿›ç‰ˆã€‚
-	 * æš‚æ—¶æ²¡å®Œå–„
+	 * ĞŞ¸ÄÈË£ºdumc Ê±¼ä£º20130710 »ñµÃ²éÑ¯Êı¾İ¿â¼ÇÂ¼ÊıµÄsqlÓï¾ä¸Ä½ø°æ¡£
+	 * ÔİÊ±Ã»ÍêÉÆ
 	 * @return
 	 */
 	public String getRowCountSql2(Class<?> clazz) {
@@ -170,7 +170,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param param
 	 * @param value
@@ -181,7 +181,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param param
 	 * @param value
@@ -196,7 +196,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param paramMap
 	 * @return
@@ -209,7 +209,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param name
 	 * @param vals
@@ -225,7 +225,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param name
 	 * @param vals
@@ -237,7 +237,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param name
 	 * @param vals
@@ -252,7 +252,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * è®¾ç½®å‚æ•°ã€‚ä¸hibernateçš„Queryæ¥å£ä¸€è‡´ã€‚
+	 * ÉèÖÃ²ÎÊı¡£ÓëhibernateµÄQuery½Ó¿ÚÒ»ÖÂ¡£
 	 * 
 	 * @param name
 	 * @param vals
@@ -263,7 +263,7 @@ public class SQLBuilder {
 	}
 
 	/**
-	 * å°†sqlBuilderä¸­çš„å‚æ•°è®¾ç½®åˆ°queryä¸­ã€‚
+	 * ½«sqlBuilderÖĞµÄ²ÎÊıÉèÖÃµ½queryÖĞ¡£
 	 * 
 	 * @param query
 	 */

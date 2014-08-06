@@ -1,11 +1,19 @@
 package com.eaglesoft.socket.server;
 
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class EchoServer implements Runnable
 {
+    
+    private static final Logger logger = LogManager.getLogger(EchoServer.class);
+    
 	private ServerSocket server ;
 
 	private boolean done =false;
@@ -32,7 +40,7 @@ public class EchoServer implements Runnable
 				Socket socket= this.server.accept();
 				if(!isDone())new Thread(new ServerSocketClient(this,socket)).start();
 			} catch (SocketException e){
-				System.out.println("perhaps time over");
+			    logger.error("perhaps time over");
 			}
 			catch (IOException e)
 			{

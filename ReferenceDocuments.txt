@@ -1,0 +1,7 @@
+
+convert file encoding
+http://a280606790.iteye.com/blog/761634
+
+
+bibernate -performance -tuning
+http://java.dzone.com/articles/hibernate-performance-tuning

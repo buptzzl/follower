@@ -1,24 +1,19 @@
 package com.eaglesoft.stock;
 
 import java.io.IOException;
-import java.net.Authenticator;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Scanner;
+import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.quartz.impl.StdScheduler;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
-import com.eaglesoft.socket.server.EchoServer;
-import com.eaglesoft.socket.server.ServerSocketClient;
-import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
 import com.eaglesoft.stock.dispatcher.StockEventDispatcher;
-import com.eaglesoft.stock.event.ZjlxStockEodEvent;
-import com.eaglesoft.stock.parser.ZjlxDataParser;
-import com.eaglesoft.utils.http.proxy.BasicAuthenticator;
+import com.eaglesoft.stock.task.ZjlxStockRuntimeTask;
+import com.eaglesoft.utils.date.DateUtil;
 
 /**
  * Hello world!
@@ -27,13 +22,45 @@ import com.eaglesoft.utils.http.proxy.BasicAuthenticator;
 public class App 
 {
 	
+    private static final Logger logger = LogManager.getLogger(App.class);
+    
+    private boolean done =false;
 	public  StockEventDispatcher dispatcher;
 	public static App instance;
+	protected List synchedList;
+	protected ClassPathXmlApplicationContext applicationContect;
+
     public static void main( String[] args ) throws IOException
     {
-    	System.out.println("starting app");
-    	init();
-    	System.out.println("app is up");
+        logger.info("starting app");
+        init();
+        logger.info("app is up");
+       
+            try {
+                logger.info("shuting down quartz scheduler");
+                while(!instance.isDone()){
+                    try {
+                        synchronized (instance.synchedList) {
+                            ;
+                            logger.info(DateUtil.DF_YYYY_MM_DD_HH_MI_SS.format(new Date())+":waiting synchedList");
+                            instance.synchedList.wait(60000l);
+                        
+                        }
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+               
+                }
+            }
+            finally {
+                StdScheduler scheduler = (StdScheduler) instance.applicationContect.getBean("scheduler");
+                logger.info("shuting down quartz scheduler");
+                if (scheduler.isStarted()) {
+                    scheduler.shutdown(true);
+                }
+            }
+        
     }
     
 	public  StockEventDispatcher getDispatcher() {
@@ -56,15 +83,30 @@ public class App
 		return instance;
 	}
 
-	private static void init() throws IOException {
-		System.out.println("initializing app");
+	public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void init() throws IOException {
+        logger.info("initializing app");
+		
 		App app = new App();
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext( "META-INF/spring/appConfig.xml");
+		app.applicationContect = applicationContext;
 		app.setDispatcher((StockEventDispatcher) applicationContext.getBean("dispatcher"));
+		app.synchedList = Collections.synchronizedList(new LinkedList());
 		instance  = app;
-		new Thread(new EchoServer()).start();
+		//new Thread(new EchoServer()).start(); destroy-method="destroy"
 
 	}
 	
+	protected void finalize() throws Throwable {
+	    logger.info("destroying app");
+	}	
 
 }

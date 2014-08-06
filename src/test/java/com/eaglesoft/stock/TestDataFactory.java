@@ -13,9 +13,9 @@ import com.eaglesoft.stock.parser.ZjlxDataParser;
 import com.eaglesoft.utils.date.DateUtil;
 
 public class TestDataFactory {
-        final static String TEST_DATA1 = "{\"data\":[\"600739,1,1,è¾½å®æˆå¤§,15.44,3.90,9596ä¸‡,13.72,7553ä¸‡,10.80,2043ä¸‡,2.92,-5208ä¸‡,-7.44,-4388ä¸‡,-6.27\",\"600787,1,1,ä¸­å‚¨è‚¡ä»½,15.23,2.63,1972ä¸‡,9.37,975ä¸‡,4.64,997ä¸‡,4.74,-1046ä¸‡,-4.97,-926ä¸‡,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
-        final static String TEST_DATA2 = "{\"data\":[\"600383,1,1,é‡‘åœ°é›†å›¢,10.22,9.30,1.51äº¿,5.34,3.24äº¿,11.45,-1.73äº¿,-6.11,-5641ä¸‡,-1.99,-9490ä¸‡,-3.35\",\"000402,2,2,é‡‘èè¡—,5.76,6.67,1.36äº¿,12.73,1.99äº¿,18.67,-6338ä¸‡,-5.94,-6453ä¸‡,-6.04,-7137ä¸‡,-6.69\",\"600036,1,1,æ‹›å•†é“¶è¡Œ,10.07,0.80,6416ä¸‡,8.69,4206ä¸‡,5.70,2210ä¸‡,2.99,-3971ä¸‡,-5.38,-2445ä¸‡,-3.31\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"2627\",\"exTime\":\"21.3813\",\"update\":\"2014-04-27 21:01:04\",\"datatime\":\"2014-04-25\"};";
-        final static String TEST_DATA3 = "{\"data\":[\"600383,1,1,é‡‘åœ°é›†å›¢,10.22,9.30,1.51äº¿,5.34,3.24äº¿,11.45,-1.73äº¿,-6.11,-5641ä¸‡,-1.99,-9490ä¸‡,-12.35\",\"000402,2,2,é‡‘èè¡—,5.76,6.67,1.36äº¿,12.73,1.99äº¿,18.67,-6338ä¸‡,-5.94,-6453ä¸‡,-6.04,-7137ä¸‡,-16.69\",\"600036,1,1,æ‹›å•†é“¶è¡Œ,10.07,0.80,6416ä¸‡,8.69,4206ä¸‡,5.70,2210ä¸‡,2.99,-3971ä¸‡,-5.38,-2445ä¸‡,-10.31\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"2627\",\"exTime\":\"21.3813\",\"update\":\"2014-04-27 21:01:04\",\"datatime\":\"2014-04-25\"};";
+        final static String TEST_DATA1 = "{\"data\":[\"600739,1,1,ÁÉÄş³É´ó,15.44,3.90,9596Íò,13.72,7553Íò,10.80,2043Íò,2.92,-5208Íò,-7.44,-4388Íò,-6.27\",\"600787,1,1,ÖĞ´¢¹É·İ,15.23,2.63,1972Íò,9.37,975Íò,4.64,997Íò,4.74,-1046Íò,-4.97,-926Íò,-4.40\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"1\",\"exTime\":\"0.0374\",\"update\":\"2014-04-20 10:57:32\",\"datatime\":\"2014-04-18\"};";
+        final static String TEST_DATA2 = "{\"data\":[\"600383,1,1,½ğµØ¼¯ÍÅ,11.22,8.30,1.51ÒÚ,6.34,3.24ÒÚ,11.45,-1.73ÒÚ,-7.11,-5641Íò,-1.99,-9590Íò,-3.35\",\"000402,2,2,½ğÈÚ½Ö,5.76,6.67,1.36ÒÚ,12.73,1.99ÒÚ,18.67,-6338Íò,-5.94,-6453Íò,-6.04,-7137Íò,-6.69\",\"600036,1,1,ÕĞÉÌÒøĞĞ,10.07,0.80,6416Íò,8.69,4206Íò,5.70,2210Íò,2.99,-3971Íò,-5.38,-2445Íò,-3.31\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"2627\",\"exTime\":\"21.3813\",\"update\":\"2014-04-27 21:01:04\",\"datatime\":\"2014-04-25\"};";
+        final static String TEST_DATA3 = "{\"data\":[\"600383,1,1,½ğµØ¼¯ÍÅ,10.22,9.30,1.51ÒÚ,5.34,3.24ÒÚ,11.45,-1.73ÒÚ,-6.11,-5641Íò,-1.99,-9490Íò,-12.35\",\"000402,2,2,½ğÈÚ½Ö,5.76,6.67,1.36ÒÚ,12.73,1.99ÒÚ,18.67,-6338Íò,-5.94,-6453Íò,-6.04,-7137Íò,-16.69\",\"600036,1,1,ÕĞÉÌÒøĞĞ,10.07,0.80,6416Íò,8.69,4206Íò,5.70,2210Íò,2.99,-3971Íò,-5.38,-2445Íò,-10.31\"],\"page\":\"1\",\"pages\":\"53\",\"pageSize\":\"50\",\"count\":\"2627\",\"exTime\":\"21.3813\",\"update\":\"2014-04-27 21:01:04\",\"datatime\":\"2014-04-25\"};";
     
     public static List<ZjlxStockRuntime> getZjlxStockRuntimeTestData1() throws Exception{
         ZjlxDataParser parser = new ZjlxDataParser();
@@ -27,14 +27,14 @@ public class TestDataFactory {
     
     public static List<ZjlxStockRuntime> getZjlxStockRuntimeTestData2() throws Exception{
         ZjlxDataParser parser = new ZjlxDataParser();
-        ZjlxAggregator<ZjlxStockRuntime> aggregator = parser.parse(TEST_DATA2,DateUtil.DF_YYYY_MM_DD.parse("2014-04-27"));
+        ZjlxAggregator<ZjlxStockRuntime> aggregator = parser.parse(TEST_DATA2,DateUtil.DF_YYYY_MM_DD.parse("2014-04-16"));
         List<ZjlxStockRuntime>  list= aggregator.getData();
         return list;
     }
 
     public static List<ZjlxStockRuntime> getZjlxStockRuntimeTestData3() throws Exception{
         ZjlxDataParser parser = new ZjlxDataParser();
-        ZjlxAggregator<ZjlxStockRuntime> aggregator = parser.parse(TEST_DATA3,DateUtil.DF_YYYY_MM_DD.parse("2014-04-26"));
+        ZjlxAggregator<ZjlxStockRuntime> aggregator = parser.parse(TEST_DATA3,DateUtil.DF_YYYY_MM_DD.parse("2014-04-27"));
         List<ZjlxStockRuntime>  list= aggregator.getData();
         return list;
     }

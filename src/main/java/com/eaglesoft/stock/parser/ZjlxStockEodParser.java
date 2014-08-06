@@ -1,5 +1,6 @@
 package com.eaglesoft.stock.parser;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -11,21 +12,19 @@ import com.eaglesoft.stock.domainObjects.ZjlxAggregator;
 public class ZjlxStockEodParser extends ZjlxDataParser {
 
 	@Override
-	public <T> ZjlxAggregator<T> parse(String str) throws Exception{
+	public <T> ZjlxAggregator<T> parse(String str, Date now) throws Exception{
         JSONObject obj;
         ZjlxAggregator<T> aggregator = new ZjlxAggregator<T>();
-        
-        Date now = new Date();
         
 		try {
 			obj = new JSONObject(str);
 			JSONArray stockList = obj.getJSONArray("data");
-			aggregator.setTotalPages(obj.getInt("pages"));
-			aggregator.setPageSize(obj.getInt("pageSize"));
-			aggregator.setCount(obj.getInt("count"));
-			aggregator.setExTime(obj.getDouble("exTime"));
-			aggregator.setUpdate(dateFormat.parse(obj.getString("update")));
-			aggregator.setUpdate(dateFormat2.parse(obj.getString("datatime")));
+			//aggregator.setTotalPages(obj.getInt("pages"));
+			//aggregator.setPageSize(obj.getInt("pageSize"));
+			//aggregator.setCount(obj.getInt("count"));
+			//aggregator.setExTime(obj.getDouble("exTime"));
+			//aggregator.setUpdate(dateFormat.parse(obj.getString("update")));
+			//aggregator.setUpdate(dateFormat2.parse(obj.getString("datatime")));
 			
 			for (int i = 0; i < stockList.length(); i++){
 				ZjlxStockEod zjlx= parseAsZjlxStockEod(stockList.getString(i));
@@ -46,7 +45,7 @@ public class ZjlxStockEodParser extends ZjlxDataParser {
 		   ZjlxStockEod result = new ZjlxStockEod();
 		   String[] attributes =  str.split(",");
 		   result.setCode(attributes[index]);
-		   index = index+3;
+		   index = index+1;
 		   result.setName(attributes[index++]);
 		   result.setClosePrice(toBigDecimal(attributes[index++]));
 		   result.setJrzdf(toBigDecimal(attributes[index++]));
@@ -60,7 +59,16 @@ public class ZjlxStockEodParser extends ZjlxDataParser {
 		   result.setRateOfJrzdjlr(toBigDecimal(attributes[index++]));
 		   result.setJrxdjlr(toBigDecimal(attributes[index++]));
 		   result.setRateOfJrxdjlr(toBigDecimal(attributes[index++]));
-		   
+		   if(BigDecimal.ZERO.compareTo(result.getRateOfJrxdjlr())!=0)
+           {
+               result.setVolumn(result.getJrxdjlr().movePointRight(2).divide(result.getRateOfJrxdjlr(),0, BigDecimal.ROUND_HALF_EVEN).abs());
+           } 
+		   else if(BigDecimal.ZERO.compareTo(result.getRateOfJrzdjlr())!=0) {
+		       result.setVolumn(result.getJrzdjlr().movePointRight(2).divide(result.getRateOfJrzdjlr(),0, BigDecimal.ROUND_HALF_EVEN).abs());
+		   }
+		   else {
+               result.setVolumn(BigDecimal.ZERO);
+           }
 		   return result;
 	   }
 

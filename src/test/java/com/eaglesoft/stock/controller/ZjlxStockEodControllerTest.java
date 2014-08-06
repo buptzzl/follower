@@ -1,5 +1,7 @@
 package com.eaglesoft.stock.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,18 +13,21 @@ import com.eaglesoft.stock.service.ZjlxOfStockService;
 
 public class ZjlxStockEodControllerTest {
 
+    private static final Logger logger = LogManager.getLogger(ZjlxStockEodControllerTest.class);
+    
 	ZjlxStockEodController controller;
 	
 	@Before
 	public void setUp() throws Exception {
 		String[] configFiles = new String[]{
-				"classpath:META-INF/spring/daos.xml",
-				"classpath:META-INF/spring/services.xml",
-				"classpath:META-INF/spring/parsers.xml",
-				"classpath:META-INF/spring/controllers.xml",
+		        "classpath:META-INF/spring/daos.xml",
+                "classpath:META-INF/spring/services.xml",
+                "classpath:META-INF/spring/parsers.xml",
+                "classpath:META-INF/spring/analyzers.xml",
+                "classpath:META-INF/spring/controllers.xml",
 		};
 		 ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(configFiles);
-		 this.controller = (ZjlxStockEodController) applicationContext.getBean("zjlxStockRuntimeController");
+		 this.controller = (ZjlxStockEodController) applicationContext.getBean("zjlxStockEodController");
 	     
 	}
 
@@ -33,7 +38,7 @@ public class ZjlxStockEodControllerTest {
 		
 		controller.process(new ZjlxStockEodEvent());
 		
-		System.out.print("time spent:"+(System.currentTimeMillis() - startTime));
+		logger.info("time spent:"+(System.currentTimeMillis() - startTime));
 	}
 
 	
@@ -50,7 +55,7 @@ public class ZjlxStockEodControllerTest {
 		controller.setParser(new ZjlxStockEodParser());
 		controller.process(new ZjlxStockEodEvent());
 		
-		System.out.print("time spent:"+(System.currentTimeMillis() - startTime));
+		logger.info("time spent:"+(System.currentTimeMillis() - startTime));
 	}
 
 }

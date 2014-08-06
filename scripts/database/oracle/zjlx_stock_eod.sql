@@ -21,7 +21,9 @@ CREATE TABLE zjlx_stock_eod(
   jrzdjlr NUMBER(19,4) NULL,
   rateOfJrzdjlr NUMBER(10,4) NULL,
   jrxdjlr NUMBER(19,4) NULL,
-  rateOfJrxdjlr NUMBER(10,4) NULL
+  rateOfJrxdjlr NUMBER(10,4) NULL,
+  volumn NUMBER(19,4) NULL,
+  DB_UPDATE_TSP          TIMESTAMP(6)           DEFAULT CURRENT_TIMESTAMP     NOT NULL
 )PARTITION BY RANGE (businessDate) (  
   PARTITION PD21000101 VALUES LESS THAN (to_date('21000101','YYYYMMDD')));
 

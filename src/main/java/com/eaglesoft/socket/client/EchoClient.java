@@ -1,11 +1,21 @@
 package com.eaglesoft.socket.client;
 
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class EchoClient {
 	
+    private static final Logger logger = LogManager.getLogger(EchoClient.class);
+    
 	private PrintWriter out;
 	private BufferedReader in;
 	private Socket connection;
@@ -60,16 +70,16 @@ public class EchoClient {
         	 
          }
          catch (SecurityException e) {
-             System.out.println("SecurityException when connecting Server!");
+             logger.error("SecurityException when connecting Server!");
          }
          catch (IOException e) {
-             System.out.println("IOException when connecting Server!");
+             logger.error("IOException when connecting Server!");
          }
      }
 
      
      public void showInfor(String infor){
-    	  System.out.println(infor);  
+         logger.info(infor);  
      }
 	 public void close()
 	{

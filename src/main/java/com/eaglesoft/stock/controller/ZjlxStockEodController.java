@@ -1,8 +1,11 @@
 package com.eaglesoft.stock.controller;
 
+import java.util.Date;
+
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockEod;
 import com.eaglesoft.stock.domainObjects.ZjlxAggregator;
 import com.eaglesoft.stock.event.ApplicationEvent;
+import com.eaglesoft.stock.event.EventStatus;
 import com.eaglesoft.stock.parser.ZjlxStockEodParser;
 import com.eaglesoft.stock.service.ZjlxOfStockService;
 import com.eaglesoft.utils.JasonUtil;
@@ -39,8 +42,11 @@ public class ZjlxStockEodController extends AbstractController {
 			HttpProxyUtil.setupHttpProxy();
 
 		String jsonData = JasonUtil.retrieveData(event.getUrlOfData());
-		ZjlxAggregator<ZjlxStockEod> aggregator =  parser.parse(jsonData);
+		Date extractTime = new Date();
+		ZjlxAggregator<ZjlxStockEod> aggregator =  parser.parse(jsonData,extractTime);
 		zjlxOfStockService.getDao().save( aggregator.getData());
+		event.getResponse().put("extractTime", extractTime);
+        event.setStatus(EventStatus.SUCCESS);
 		
 	}
 }

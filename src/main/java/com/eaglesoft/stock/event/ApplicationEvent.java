@@ -5,9 +5,14 @@ import java.util.Map;
 public class ApplicationEvent {
 	private EventType type;
 	private String urlOfData;
-	private Map<String, Object> parameters;
+	private EventStatus status;
+	
+    private Map<String, Object> parameters;
+    private Map<String, Object> response;
+	
 
-	public EventType getType() {
+
+    public EventType getType() {
 		return type;
 	}
 
@@ -23,6 +28,15 @@ public class ApplicationEvent {
 		this.parameters = parameters;
 	}
 
+	public Map<String, Object> getResponse() {
+        return response;
+    }
+
+    public void setResponse(Map<String, Object> response) {
+        this.response = response;
+    }
+
+	
 	public String getUrlOfData() {
 		return urlOfData;
 	}
@@ -30,5 +44,13 @@ public class ApplicationEvent {
 	public void setUrlOfData(String urlOfData) {
 		this.urlOfData = urlOfData;
 	}
+	
+	public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
+    }
 
 }

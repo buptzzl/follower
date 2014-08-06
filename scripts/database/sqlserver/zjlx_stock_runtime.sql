@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[zjlx_stock_runtime](
   [rateOfJrzdjlr] [decimal](18, 2) NULL,
   [jrxdjlr] [decimal](18, 2) NULL,
   [rateOfJrxdjlr] [decimal](18, 2) NULL,
+  [volumn] [decimal](18, 2) NULL,
  CONSTRAINT [PK_ZJLX_STOCK_RUNTIME__3213E83F2704CA5F] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

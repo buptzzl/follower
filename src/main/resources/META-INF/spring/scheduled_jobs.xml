@@ -4,9 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="zjlxStockRuntimeTask" class="com.eaglesoft.stock.task.ZjlxStockRuntimeTask"></bean>
-
-   
     <bean id="runtimeJob"
 
         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -26,12 +23,57 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 		<property name="repeatInterval" value="600000" />
 
     </bean>
+    
+    
+    <!-- whole hours of 10AM ,13PM and 14PM every MON-FIR -->
+    <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="runtimeJob" />
+        <property name="cronExpression" value="0 0/30 10,13-14 ? * MON-FRI" />
+    </bean>
+    
+    <!-- 11:00 to 11:30AM every MON-FIR -->
+     <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="runtimeJob" />
+        <property name="cronExpression" value="0 0-30/30 11 ? * MON-FRI" />
+    </bean>
+    <!-- 9:30 to 9:59AM every MON-FIR -->
+    <bean id="cronTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="runtimeJob" />
+        <property name="cronExpression" value="0 30-59/30 9 ? * MON-FRI" />
+    </bean>
+    
+    <bean id="cronTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="runtimeJob" />
+        <property name="cronExpression" value="0 30-59/2 21 ? * MON-FRI" />
+    </bean>
+    
+    
+     <!-- Eod Job definition -->
+      <bean id="eodJob"
 
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+
+        <property name="targetObject" ref="zjlxStockRuntimeTask"></property>
+
+        <property name="targetMethod" value="extractEodZjlxStock"></property>
+
+      </bean>
+      
+       <bean id="cronTriggerEod1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="eodJob" />
+        <property name="cronExpression" value="0 10 15 ? * MON-FRI" />
+    </bean>
+    
+     <!--end  Eod Job  definition-->
+    
+  <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" destroy-method="destroy">
         <property name="triggers">
             <list>
-                <ref bean="runtimeTrigger" />
+            	 <ref bean="cronTrigger1" />
+                 <ref bean="cronTrigger2" />
+                 <ref bean="cronTrigger3" />
+                 <ref bean="cronTriggerEod1" />
             </list>
         </property>
-    </bean>
+   </bean> 
 </beans>

@@ -37,6 +37,7 @@ public class ZjlxStockEod extends IdEntity {
 	private BigDecimal rateOfJrzdjlr;
 	private BigDecimal jrxdjlr;
 	private BigDecimal rateOfJrxdjlr;
+	private BigDecimal volumn;
 
 	@Column(name = "businessDate", nullable = true)
 	public java.util.Date getBusinessDate() {
@@ -200,5 +201,14 @@ public class ZjlxStockEod extends IdEntity {
 	public void setRateOfJrxdjlr(BigDecimal rateOfJrxdjlr) {
 		this.rateOfJrxdjlr = rateOfJrxdjlr;
 	}
+
+	@Column(name ="volumn",nullable=true)
+    public BigDecimal getVolumn() {
+        return volumn;
+    }
+
+    public void setVolumn(BigDecimal volumn) {
+        this.volumn = volumn;
+    }
 
 }

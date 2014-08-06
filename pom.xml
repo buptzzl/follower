@@ -11,12 +11,12 @@
   <properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<junit.version>4.4</junit.version>
-		<hibernate.version>4.1.0.Final</hibernate.version>
+		<hibernate.version>4.2.3.Final</hibernate.version>
 		<quartz.version>2.2.1</quartz.version>
 		
-		
+		<!--
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
 
 		<oracle-user>user</oracle-user> 
 		<oracle-password>pwd</oracle-password> 
@@ -45,13 +45,35 @@
                         <target>1.6</target>
 						<compilerArgument></compilerArgument>
 						<properties>
-							<!--<sourceEncoding>UTF-8</sourceEncoding> -->
 						    <debug>true</debug>
 							<compilerVersion>1.6</compilerVersion>
                             <maven.compiler.forceJavacCompilerUse>true</maven.compiler.forceJavacCompilerUse>  
 						</properties>
                     </configuration>
             </plugin>
+			<plugin>
+			   <groupId>org.apache.maven.plugins</groupId>
+			   <artifactId>maven-antrun-plugin</artifactId>
+			   <version>1.7</version>
+			   <executions>
+				  <execution>			  
+				  <id>copy</id>
+				  <phase>clean</phase>
+				  <goals>
+					 <goal>run</goal>
+				  </goals>
+				  <configuration>
+					<!--<target name="convert file encoding">      
+						 <copy todir="src_gbk/" encoding="UTF-8" outputencoding="GBK">
+							<fileset dir="src/">
+								<include name="**/*.*"/>
+							</fileset>
+						</copy>
+					 </target> -->
+				  </configuration>                       
+			   </execution> 
+			 </executions>
+			</plugin>
         </plugins>
 		<resources>
 			<resource>
@@ -219,9 +241,15 @@
 	<dependency>
 		<groupId>ojdbc</groupId>
 		<artifactId>ojdbc</artifactId>
-		<version>14</version>
+		<version>6</version>
 		<scope>compile</scope>
 	</dependency>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.31</version>
+	</dependency>
+
 	<dependency>
 		<groupId>net.sourceforge.jtds</groupId>
 		<artifactId>jtds</artifactId>
@@ -244,6 +272,13 @@
 		<groupId>log4j</groupId>
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
-	</dependency>				
+		<scope>compile</scope>
+	</dependency>	
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>1.7.5</version>
+		<scope>compile</scope>
+	</dependency>
   </dependencies>
 </project>

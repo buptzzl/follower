@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime;
@@ -14,6 +15,8 @@ import com.eaglesoft.utils.CharUtil;
 
 
 public class ZjlxDataParser extends DataParser {
+    
+    private static final Logger logger = LogManager.getLogger(ZjlxDataParser.class);
 	
 	protected SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	protected SimpleDateFormat dateFormat2=new SimpleDateFormat("yyyy-MM-dd");
@@ -32,12 +35,12 @@ public class ZjlxDataParser extends DataParser {
 		try {
 			obj = new JSONObject(str);
 			JSONArray stockList = obj.getJSONArray("data");
-			aggregator.setTotalPages(obj.getInt("pages"));
-			aggregator.setPageSize(obj.getInt("pageSize"));
-			aggregator.setCount(obj.getInt("count"));
-			aggregator.setExTime(obj.getDouble("exTime"));
-			aggregator.setUpdate(dateFormat.parse(obj.getString("update")));
-			aggregator.setUpdate(dateFormat2.parse(obj.getString("datatime")));
+			//aggregator.setTotalPages(obj.getInt("pages"));
+			//aggregator.setPageSize(obj.getInt("pageSize"));
+			//aggregator.setCount(obj.getInt("count"));
+			//aggregator.setExTime(obj.getDouble("exTime"));
+			//aggregator.setUpdate(dateFormat.parse(obj.getString("update")));
+			//aggregator.setUpdate(dateFormat2.parse(obj.getString("datatime")));
 			
 			for (int i = 0; i < stockList.length(); i++){
 				ZjlxStockRuntime zjlx= parseAsRecord(stockList.getString(i));
@@ -82,7 +85,7 @@ public class ZjlxDataParser extends DataParser {
 					result= BigDecimal.valueOf(Double.parseDouble(str)) ;
 				} catch (Exception exp)
 				{
-					System.err.print("string:"+str);
+				    logger.error("string:"+str);
 					return BigDecimal.ZERO;
 				}
 			}
@@ -119,7 +122,7 @@ public class ZjlxDataParser extends DataParser {
 		   ZjlxStockRuntime result = new ZjlxStockRuntime();
 		   String[] attributes =  str.split(",");
 		   result.setCode(attributes[index]);
-		   index = index+3;
+		   index = index+1;
 		   result.setName(attributes[index++]);
 		   result.setLatestPrice(toBigDecimal(attributes[index++]));
 		   result.setJrzdf(toBigDecimal(attributes[index++]));
@@ -134,6 +137,17 @@ public class ZjlxDataParser extends DataParser {
 		   result.setJrxdjlr(toBigDecimal(attributes[index++]));
 		   result.setRateOfJrxdjlr(toBigDecimal(attributes[index++]));
 		   
+		   if(BigDecimal.ZERO.compareTo(result.getRateOfJrxdjlr())!=0)
+		   {
+		       result.setVolumn(result.getJrxdjlr().movePointRight(2).divide(result.getRateOfJrxdjlr(),0, BigDecimal.ROUND_HALF_EVEN).abs());
+		   } 
+		   else if(BigDecimal.ZERO.compareTo(result.getRateOfJrzdjlr())!=0) {
+               result.setVolumn(result.getJrzdjlr().movePointRight(2).divide(result.getRateOfJrzdjlr(),0, BigDecimal.ROUND_HALF_EVEN).abs());
+           }
+		   else {
+		       result.setVolumn(BigDecimal.ZERO);
+		   }
+
 		   return result;
 	   }
 	

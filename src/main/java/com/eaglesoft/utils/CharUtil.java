@@ -2,14 +2,14 @@ package com.eaglesoft.utils;
 import java.util.regex.Pattern;
 
 /**
- * å­—ç¬¦é€šç”¨å·¥å…·ç±»
+ * ×Ö·ûÍ¨ÓÃ¹¤¾ßÀà
  * 
  * @author <a href="http://www.micmiu.com">Michael Sun</a>
  */
 public class CharUtil {
 
 
-	// æ ¹æ®Unicodeç¼–ç å®Œç¾çš„åˆ¤æ–­ä¸­æ–‡æ±‰å­—å’Œç¬¦å·
+	// ¸ù¾İUnicode±àÂëÍêÃÀµÄÅĞ¶ÏÖĞÎÄºº×ÖºÍ·ûºÅ
 	private static boolean isChinese(char c) {
 		Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
 		if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
@@ -24,7 +24,7 @@ public class CharUtil {
 		return false;
 	}
 
-	// å®Œæ•´çš„åˆ¤æ–­ä¸­æ–‡æ±‰å­—å’Œç¬¦å·
+	// ÍêÕûµÄÅĞ¶ÏÖĞÎÄºº×ÖºÍ·ûºÅ
 	public static boolean isChinese(String strName) {
 		char[] ch = strName.toCharArray();
 		for (int i = 0; i < ch.length; i++) {
@@ -40,7 +40,7 @@ public class CharUtil {
    
 		
 
-	// åªèƒ½åˆ¤æ–­éƒ¨åˆ†CJKå­—ç¬¦ï¼ˆCJKç»Ÿä¸€æ±‰å­—ï¼‰
+	// Ö»ÄÜÅĞ¶Ï²¿·ÖCJK×Ö·û£¨CJKÍ³Ò»ºº×Ö£©
 	public static boolean isChineseByREG(String str) {
 		if (str == null) {
 			return false;
@@ -48,7 +48,7 @@ public class CharUtil {
 		Pattern pattern = Pattern.compile("[\\u4E00-\\u9FBF]+");
 		return pattern.matcher(str.trim()).find();
 	}
-    // is äº¿
+    // is ÒÚ
 	public static boolean isCharIncluded(String str, String unicode) {
 		if (str == null) {
 			return false;
@@ -57,13 +57,13 @@ public class CharUtil {
 		Pattern pattern = Pattern.compile(unicode);
 		return pattern.matcher(str.trim()).find();
 	}
-	// åªèƒ½åˆ¤æ–­éƒ¨åˆ†CJKå­—ç¬¦ï¼ˆCJKç»Ÿä¸€æ±‰å­—ï¼‰
+	// Ö»ÄÜÅĞ¶Ï²¿·ÖCJK×Ö·û£¨CJKÍ³Ò»ºº×Ö£©
 	public static boolean isChineseByName(String str) {
 		if (str == null) {
 			return false;
 		}
-		// å¤§å°å†™ä¸åŒï¼š\\p è¡¨ç¤ºåŒ…å«ï¼Œ\\P è¡¨ç¤ºä¸åŒ…å« 
-		// \\p{Cn} çš„æ„æ€ä¸º Unicode ä¸­æœªè¢«å®šä¹‰å­—ç¬¦çš„ç¼–ç ï¼Œ\\P{Cn} å°±è¡¨ç¤º Unicodeä¸­å·²ç»è¢«å®šä¹‰å­—ç¬¦çš„ç¼–ç 
+		// ´óĞ¡Ğ´²»Í¬£º\\p ±íÊ¾°üº¬£¬\\P ±íÊ¾²»°üº¬ 
+		// \\p{Cn} µÄÒâË¼Îª Unicode ÖĞÎ´±»¶¨Òå×Ö·ûµÄ±àÂë£¬\\P{Cn} ¾Í±íÊ¾ UnicodeÖĞÒÑ¾­±»¶¨Òå×Ö·ûµÄ±àÂë
 		String reg = "\\p{InCJK Unified Ideographs}&&\\P{Cn}";
 		Pattern pattern = Pattern.compile(reg);
 		return pattern.matcher(str.trim()).find();

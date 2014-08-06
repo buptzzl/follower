@@ -10,6 +10,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 			 <map>
 				<entry key="ZJLX_STOCK_RUNTIME" value-ref="zjlxStockRuntimeController" />
 				<entry key="ZJLX_STOCK_EOD" value-ref="zjlxStockEodController" />
+				<entry key="DELTA_VOLUMN_ANALYZE" value-ref="deltaVolumnAnalyzeController" />
 			</map>
 		 </property>
 	 </bean>
@@ -26,5 +27,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<property name="parser" ref="zjlxDataParser"></property>
  </bean>
  
+ <bean id="deltaVolumnAnalyzeController" class="com.eaglesoft.stock.controller.DeltaVolumnAnalyzeController">
+	<property name="topXDeltaAnalyzer" ref="topXDeltaAnalyzer"></property>
+ </bean>
 
 </beans>
