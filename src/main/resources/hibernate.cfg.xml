@@ -22,7 +22,8 @@
   <property name="current_session_context_class">thread</property>
   <mapping class="com.eaglesoft.stock.core.monitor.entity.ZjlxStockRuntime" />
   <mapping class="com.eaglesoft.stock.core.monitor.entity.ZjlxStockEod" />
-
+  <mapping class="com.eaglesoft.stock.core.monitor.entity.Stock" />
+  <mapping class="com.eaglesoft.stock.core.monitor.entity.StockCategory" />
  </session-factory>
 
 </hibernate-configuration>

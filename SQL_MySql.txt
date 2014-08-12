@@ -1,0 +1,6 @@
+#creating stock table
+
+insert into stock
+select replace(uuid(),'-','') as id ,code,name,'version1' as description from zjlx_stock_eod
+where businessDate = str_to_date("2014-08-11 07:37:43",'%Y-%m-%d %H:%i:%s');
+

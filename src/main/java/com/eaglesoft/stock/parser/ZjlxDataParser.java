@@ -82,7 +82,7 @@ public class ZjlxDataParser extends DataParser {
 				result = BigDecimal.valueOf(valueWithoutUnit).movePointRight(8);
 			}else {
 				try{
-					result= BigDecimal.valueOf(Double.parseDouble(str)) ;
+					result= new BigDecimal( BigDecimal.valueOf(Double.parseDouble(str)).toPlainString()) ;
 				} catch (Exception exp)
 				{
 				    logger.error("string:"+str);

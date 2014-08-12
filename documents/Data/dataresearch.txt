@@ -1,0 +1,28 @@
+URL	协议	方法	结果	类型	已接收	已花费	发起程序	等候‎‎	开始‎‎	请求‎‎	响应‎‎	已读取缓存‎‎	差距‎‎
+http://hqdigi2.eastmoney.com/EM_Quote2010NumericApplication/cache.aspx?Type=c1&Reference=xml&0.9973256754883816	HTTP	GET	200	text/html	482 B	78 ms	<script>	15000	47	31	0	0	0
+
+
+
+URL	协议	方法	结果	类型	已接收	已花费	发起程序	等候‎‎	开始‎‎	请求‎‎	响应‎‎	已读取缓存‎‎	差距‎‎
+/Bkzj/data.aspx?type=stockFundflow&bkCode=490&page=1&pageSize=50&sortType=D&sortRule=-1&jsname=LReKzdsouM&day=1&bkType=3&rt=46925682	HTTP	GET	200	text/html	4.87 KB	110 ms	<script>	4046	0	110	0	0	0
+
+http://data.eastmoney.com/Bkzj/data.aspx?type=stockFundflow&bkCode=490&page=1&pageSize=50&sortType=D&sortRule=-1&jsname=LReKzdsouM&day=1&bkType=3&rt=46925682
+
+
+URL	协议	方法	结果	类型	已接收	已花费	发起程序	等候‎‎	开始‎‎	请求‎‎	响应‎‎	已读取缓存‎‎	差距‎‎
+/Bkzj/data.aspx?category=1&type=BKFundflow&day=5&page=1&pageSize=50&sortType=B&sortRule=-1&jsname=cJNItahSyN&rt=46925707	HTTP	GET	200	text/html	3.64 KB	110 ms	<script>	1625	0	110	0	0	7922
+
+http://data.eastmoney.com/Bkzj/data.aspx?category=1&type=BKFundflow&day=5&page=1&pageSize=50&sortType=B&sortRule=-1&jsname=cJNItahSyN&rt=46925707
+
+
+
+
+URL	协议	方法	结果	类型	已接收	已花费	发起程序	等候‎‎	开始‎‎	请求‎‎	响应‎‎	已读取缓存‎‎	差距‎‎
+/Bkzj/data.aspx?type=stockFundflow&bkCode=473&page=1&pageSize=50&sortType=D&sortRule=-1&jsname=aOojAnGLOZ&day=5&bkType=2&rt=46925747	HTTP	GET	200	text/html	2.66 KB	141 ms	<script>	2609	0	141	0	0	55734
+
+
+http://data.eastmoney.com/Bkzj/data.aspx?type=stockFundflow&bkCode=473&page=1&pageSize=50&sortType=D&sortRule=-1&jsname=aOojAnGLOZ&day=5&bkType=2&rt=46925747
+
+
+URL	协议	方法	结果	类型	已接收	已花费	发起程序	等候‎‎	开始‎‎	请求‎‎	响应‎‎	已读取缓存‎‎	差距‎‎
+http://data.eastmoney.com/Bkzj/data.aspx?category=3&type=BKFundflow&day=1&page=1&pageSize=50&sortType=B&sortRule=-1&jsname=QNGrccKLFX&rt=46925766	HTTP	GET	200	text/html	5.33 KB	94 ms	<script>	16	0	94	0	0	9172
